@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Alley's blog
+title: alley's blog
 subtitle:
 description:
 keywords:
 author: Alley
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 search:
@@ -19,7 +19,7 @@ search:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://tinyalley.github.io
+url: https://blog.c9.work
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
