@@ -269,7 +269,7 @@ kubectl delete deploy nginx
 - 此为单主多子节点配置，多主多子配置方法有所不同，日后再说--
 
 ---
-<div id="container"></div>
+<!-- <div id="container"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
@@ -282,4 +282,4 @@ var gitment = new Gitment({
   },
 })
 gitment.render('container')
-</script>
+</script> -->

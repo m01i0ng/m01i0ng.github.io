@@ -38,7 +38,7 @@ $ hexo deploy
 More info: [Deployment](https://hexo.io/docs/deployment.html)
 
 ---
-<div id="container"></div>
+<!-- <div id="container"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
@@ -51,4 +51,4 @@ var gitment = new Gitment({
   },
 })
 gitment.render('container')
-</script>
+</script> -->
