@@ -267,3 +267,19 @@ kubectl delete deploy nginx
 
 - 部署完成之后想增加节点只要按照子节点部署的步骤进行即可，之后可以参考官方文档安装 `dashboard heapster` 等插件
 - 此为单主多子节点配置，多主多子配置方法有所不同，日后再说--
+
+---
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'tinyalley',
+  repo: 'tinyalley.github.io',
+  oauth: {
+    client_id: '4fc683c05fc3ba5bcf66',
+    client_secret: 'eaf39a9547e39a17b74ee130e79385f8117827ae',
+  },
+})
+gitment.render('container')
+</script>
