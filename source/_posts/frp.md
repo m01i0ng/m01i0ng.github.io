@@ -60,7 +60,7 @@ EOF
 systemctl enable supervisord && systemctl start supervisord
 ```
 
-如对已配置的 `frps.ini` 进行修改，编辑保存之后，执行 `supervisorctl reload frps`
+如对已配置的 `frps.ini` 进行修改，`vim /root/frp/frps.ini` 编辑保存之后，执行 `supervisorctl reload frps`
 
 访问 `IP:30200` 如能进入 frp 运行面板则成功，否则请从头检查配置
 
@@ -117,9 +117,9 @@ systemctl enable supervisord && systemctl start supervisord
 
 更多服务转发配置请看 [官方说明](https://github.com/fatedier/frp/blob/master/README_zh.md#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B) 
 
-如对已配置的 `frpc.ini` 进行修改，编辑保存之后，执行 `supervisorctl reload frpc`
+如对已配置的 `frpc.ini` 进行修改，`vim /root/frp/frpc.ini` 编辑保存之后，执行 `supervisorctl reload frpc`
 
 访问 `206-web.dev.demo.cc:30100` 如能成功访问则配置成功
-ssh 连接命令：`ssh -pPort=30106 root@云服务器公网 IP`
+ssh 连接命令：`ssh -oPort=30106 root@云服务器公网 IP`
 
 ---
