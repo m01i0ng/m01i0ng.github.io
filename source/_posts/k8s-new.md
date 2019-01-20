@@ -275,7 +275,7 @@ kubectl delete deploy nginx
 <script>
 var gitment = new Gitment({
   owner: 'tinyalley',
-  repo: 'tinyalley.github.io',
+  repo: 'comments',
   oauth: {
     client_id: '4fc683c05fc3ba5bcf66',
     client_secret: 'eaf39a9547e39a17b74ee130e79385f8117827ae',
