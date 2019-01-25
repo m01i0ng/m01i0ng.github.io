@@ -121,5 +121,3 @@ systemctl enable supervisord && systemctl start supervisord
 
 访问 `206-web.dev.demo.cc:30100` 如能成功访问则配置成功
 ssh 连接命令：`ssh -oPort=30106 root@云服务器公网 IP`
-
----
