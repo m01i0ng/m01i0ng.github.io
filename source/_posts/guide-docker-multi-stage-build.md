@@ -34,9 +34,11 @@ FROM node:11-alpine as builder
 
 WORKDIR /tmp
 COPY . .
+RUN npm config set registry https://registry.npm.taobao.org \
+    && npm i -g yarn
 RUN yarn && yarn build
 
-# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际运行的镜像中，会丢弃第一阶段中其他的文件
+# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际 release 的镜像中，会丢弃第一阶段中其他的文件
 FROM nginx:alpine
 
 COPY .docker/conf/default.conf /etc/nginx/conf.d/
