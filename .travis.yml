@@ -1,6 +1,9 @@
 language: node_js
 
-sudo: required
+sudo: false
+
+notifications:
+  email: false
 
 node_js:
   - 11.8.0
@@ -24,7 +27,7 @@ script:
   - hexo generate
 
 after_script:
-  - git config user.name "tinyalley"
-  - git config user.email "alley.ma@qq.com"
+  - git config --global user.name "tinyalley"
+  - git config --global user.email "alley.ma@qq.com"
   - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
   - hexo deploy
