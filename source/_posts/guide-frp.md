@@ -104,7 +104,7 @@ EOF
 cat > /etc/supervisord.d/frpc.ini <<EOF
 [program:frpc]
 directory=/root/frp
-command=/root/frp/frps -c /root/frp/frpc.ini
+command=/root/frp/frpc -c /root/frp/frpc.ini
 autostart=true
 autorestart=false
 stderr_logfile=/var/log/supervisor/frpc_stderr.log
