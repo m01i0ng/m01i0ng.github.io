@@ -2,9 +2,9 @@
 title: Kubernetes 集群部署踩坑
 date: 2019-01-19 21:58:44
 tags:
-    - k8s
-    - linux
-    - docker
+  - k8s
+  - linux
+  - docker
 categories: k8s
 ---
 
@@ -42,10 +42,10 @@ EOF
 所有节点
 
 ```bash
-sed -i "s/^SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux 
-sed -i "s/^SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config 
-sed -i "s/^SELINUX=permissive/SELINUX=disabled/g" /etc/sysconfig/selinux 
-sed -i "s/^SELINUX=permissive/SELINUX=disabled/g" /etc/selinux/config  
+sed -i "s/^SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux
+sed -i "s/^SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+sed -i "s/^SELINUX=permissive/SELINUX=disabled/g" /etc/sysconfig/selinux
+sed -i "s/^SELINUX=permissive/SELINUX=disabled/g" /etc/selinux/config
 setenforce 0
 ```
 
@@ -63,7 +63,7 @@ systemctl disable firewalld && systemctl stop firewalld
 
 ```bash
 sed -i 's/.*swap.*/#&/' /etc/fstab
-swapoff -a 
+swapoff -a
 ```
 
 ### 配置转发参数
@@ -79,7 +79,7 @@ EOF
 sysctl --system
 ```
 
-### 加载ipvs相关内核模块
+### 加载 ipvs 相关内核模块
 
 所有节点
 
@@ -95,7 +95,7 @@ lsmod | grep ip_vs
 
 ## 安装配置 Docker
 
-k8s v1.11.0 版本推荐使用Docker v17.03，经测试 v1.13 也能正常使用，而最新的 v18.05 会产生警告，并无法使用资源限制
+k8s v1.11.0 版本推荐使用 Docker v17.03，经测试 v1.13 也能正常使用，而最新的 v18.05 会产生警告，并无法使用资源限制
 
 ### 安装 Docker
 
@@ -175,7 +175,7 @@ kubernetesVersion: v1.11.0
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
 api:
   # master 节点 ip
-  advertiseAddress: 192.168.1.220 
+  advertiseAddress: 192.168.1.220
 
 controllerManagerExtraArgs:
   node-monitor-grace-period: 10s
@@ -183,7 +183,7 @@ controllerManagerExtraArgs:
 
 networking:
   podSubnet: 10.244.0.0/16
-  
+
 kubeProxy:
   config:
     # mode: ipvs
@@ -222,7 +222,6 @@ sed -i 's/k8s.gcr.io/registry.cn-shanghai.aliyuncs.com\/gcr-k8s/g' kube-flannel.
 # 部署
 kubectl apply -f kube-flannel.yml
 ```
-
 
 查看（需要时间配置，可反复执行第一条查看直到 `pods` 状态全为 `Running`）
 

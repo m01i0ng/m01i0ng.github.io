@@ -20,7 +20,7 @@ categories:
 ```bash
 cd /root
 wget -c https://github.com/fatedier/frp/releases/download/v0.23.1/frp_0.23.1_linux_amd64.tar.gz
-tar zxvf frp*.tar.gz 
+tar zxvf frp*.tar.gz
 ```
 
 ## frps 服务端
@@ -70,8 +70,9 @@ systemctl enable supervisord && systemctl start supervisord
 
 服务器 IP：192.168.1.206
 服务：
-- web，端口80
-- ssh，端口22
+
+- web，端口 80
+- ssh，端口 22
 
 ```bash
 cd /root/frp
@@ -115,7 +116,7 @@ EOF
 systemctl enable supervisord && systemctl start supervisord
 ```
 
-更多服务转发配置请看 [官方说明](https://github.com/fatedier/frp/blob/master/README_zh.md#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B) 
+更多服务转发配置请看 [官方说明](https://github.com/fatedier/frp/blob/master/README_zh.md#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B)
 
 如对已配置的 `frpc.ini` 进行修改，`vim /root/frp/frpc.ini` 编辑保存之后，执行 `supervisorctl reload frpc`
 

@@ -2,18 +2,18 @@
 title: RESTful HTTP API 设计分解
 date: 2019-05-13 15:29:10
 tags:
-    - REST
-    - api
+  - REST
+  - api
 categories: REST
 ---
 
-# RESTful HTTP API设计分解
+# RESTful HTTP API 设计分解
 
 > 作者 @tinyalley
 
 > 设计原则借鉴于 [github](https://developer.github.com/v3/)
 
-## 什么是RESTful
+## 什么是 RESTful
 
 RESTful 是一种软件设计风格，由 Roy Fielding 在他的 论文 中提出，全称为 `Representational State Transfer`，直译为表现层状态转移，或许可以解释为用 URL 定位资源，用 HTTP 动词描述操作。
 
@@ -47,22 +47,22 @@ HTTPS 为接口的安全提供了保障，可以有效防止通信被窃听和�
 
 - 将版本号直接加入 URL 中
 
-    `https://test.com/api/v1`
-    
-    `https://test.com/api/v2`
+  `https://test.com/api/v1`
+
+  `https://test.com/api/v2`
 
 - 使用 HTTP 请求头的 Accept 字段进行区分
 
-    ```
-    https://test.com/api/
-        Accept: application/vnd.newsta.v1+json
-        Accept: application/vnd.newsta.v2+json
-    ```
-    
+  ```
+  https://test.com/api/
+      Accept: application/vnd.newsta.v1+json
+      Accept: application/vnd.newsta.v2+json
+  ```
+
 - Github 默认实现了第一种风格，但也实现了第二种
 
-    ![image](https://fsdhubcdn.phphub.org/uploads/images/201712/20/6351/iVESOhNlvt.png)
-    
+  ![image](https://fsdhubcdn.phphub.org/uploads/images/201712/20/6351/iVESOhNlvt.png)
+
 ### 用 URL 定位资源
 
 在 RESTful 的架构中，所有的一切都表示资源，每一个 URL 都代表着一种资源，资源应当是一个名词，而且大部分情况下是名词的复数，尽量不要在 URL 中出现动词。
@@ -84,7 +84,7 @@ DELETE /repos/:owner/:repo/issues/:number/lock   接收某个 issue
 在 github 的实现中，可以总结出：
 
 - 资源的设计可以嵌套，表明资源与资源之间的关系。
-- 大部分情况下我们访问的是某个资源集合，想得到单个资源可以通过资源的 id 或number 等唯一标识获取。
+- 大部分情况下我们访问的是某个资源集合，想得到单个资源可以通过资源的 id 或 number 等唯一标识获取。
 - 某些情况下，资源会是单数形式，例如某个项目某个 issue 的锁，每个 issue 只会有一把锁，所以它是单数。
 
 错误的例子:
@@ -109,17 +109,17 @@ DELETE https://api.larabbs.com/topics/1/comments/100
 
 HTTP 设计了很多动词，来表示不同的操作，RESTful 很好的利用的这一点，我们需要正确的使用 HTTP 动词，来表明我们要如何操作资源。
 
-动词 | 描述 | 是否幂等
--|-|-
-GET | 获取资源，单个或多个 | 是
-POST | 创建资源 | 否
-PUT | 更新资源，客户端提供完整资源数据 | 是
-PATCH | 更新资源，客户端提供部分资源 | 否
-DELETE | 删除资源 | 是
+| 动词   | 描述                             | 是否幂等 |
+| ------ | -------------------------------- | -------- |
+| GET    | 获取资源，单个或多个             | 是       |
+| POST   | 创建资源                         | 否       |
+| PUT    | 更新资源，客户端提供完整资源数据 | 是       |
+| PATCH  | 更新资源，客户端提供部分资源     | 否       |
+| DELETE | 删除资源                         | 是       |
 
 > 幂等：指一次和多次请求某一个资源应该具有同样的副作用，也就是一次访问与多次访问，对这个资源带来的变化是相同的。
 
-> PUT 是根据客户端提供了完整的资源数据，客户端提交什么就替换为什么，而 PATCH 有可能是根据客户端提供的参数，动态的计算出某个值，例如每次请求后资源的某个参数减1，所以多次调用，资源会有不同的变化。
+> PUT 是根据客户端提供了完整的资源数据，客户端提交什么就替换为什么，而 PATCH 有可能是根据客户端提供的参数，动态的计算出某个值，例如每次请求后资源的某个参数减 1，所以多次调用，资源会有不同的变化。
 
 > GET 请求是安全的，不允许通过 GET 请求改变（更新或创建）资源。
 
@@ -139,8 +139,8 @@ DELETE | 删除资源 | 是
 - 201 Created - 对创建新资源的 POST 操作进行响应。应该带着指向新资源地址的 Location 头
 - 202 Accepted - 服务器接受了请求，但是还未处理，响应中应该包含相应的指示信息，告诉客户端该去哪里查询关于本次请求的信息
 - 204 No Content - 对不会返回响应体的成功请求进行响应（比如 DELETE 请求）
-- 304 Not Modified - HTTP缓存header生效的时候用
-- 400 Bad Request - 请求异常，比如请求中的body无法解析
+- 304 Not Modified - HTTP 缓存 header 生效的时候用
+- 400 Bad Request - 请求异常，比如请求中的 body 无法解析
 - 401 Unauthorized - 没有进行认证或者认证非法
 - 403 Forbidden - 服务器已经理解请求，但是拒绝执行它
 - 404 Not Found - 请求一个不存在的资源

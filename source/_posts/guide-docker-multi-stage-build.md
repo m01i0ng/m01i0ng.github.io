@@ -2,8 +2,8 @@
 title: Docker 多阶段构建
 date: 2019-01-25 09:16:33
 tags:
-    - Docker
-    - DevOps
+  - Docker
+  - DevOps
 categories: Docker
 ---
 

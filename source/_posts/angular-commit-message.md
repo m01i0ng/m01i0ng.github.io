@@ -2,7 +2,7 @@
 title: 规范你的 Commit Message
 date: 2019-05-10 12:31:20
 tags:
-    - Git
+  - Git
 categories: Git
 ---
 
@@ -63,7 +63,7 @@ template = ~/.gitmessage
 # * How does it address the problem?
 # * Are there any side effects?
 #
-# footer: 
+# footer:
 # - Include a link to the ticket, if any.
 # - BREAKING CHANGE
 #
@@ -73,7 +73,7 @@ template = ~/.gitmessage
 
 [commitizen/cz-cli](https://github.com/commitizen/cz-cli)，我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message
 
-除此之外，我们还需要为 commitizen 指定一个 Adapter 比如：[cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog) (一个符合 Angular团队规范的 preset)。使得 commitizen 按照我们指定的规范帮助我们生成 commit message
+除此之外，我们还需要为 commitizen 指定一个 Adapter 比如：[cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog) (一个符合 Angular 团队规范的 preset)。使得 commitizen 按照我们指定的规范帮助我们生成 commit message
 
 ### 全局安装（推荐）
 
@@ -116,17 +116,14 @@ package.json 中配置：
 
 ```js
 module.exports = {
-  extends: [
-    '@commitlint/config-conventional'
-  ],
-  rules: {
-  }
-};
+  extends: ['@commitlint/config-conventional'],
+  rules: {},
+}
 ```
 
 ### standard-version：自动生成 CHANGELOG
 
-通过以上工具的帮助，我们的 commit message 应该是符合 Angular团队那套，这样也便于我们借助 standard-version 这样的工具，自动生成 CHANGELOG，甚至是 语义化的版本号(Semantic Version)
+通过以上工具的帮助，我们的 commit message 应该是符合 Angular 团队那套，这样也便于我们借助 standard-version 这样的工具，自动生成 CHANGELOG，甚至是 语义化的版本号(Semantic Version)
 
 安装使用：
 
@@ -143,6 +140,6 @@ package.json 配置：
 }
 ```
 
-## 最后 
+## 最后
 
 遵守以上提交规范的同时，**禁止**使用诸如 `git commit -am` 方式提交 Commit Message
