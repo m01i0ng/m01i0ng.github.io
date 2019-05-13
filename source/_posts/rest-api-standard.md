@@ -9,8 +9,6 @@ categories: REST
 
 # RESTful HTTP API 设计分解
 
-> 作者 @tinyalley
-
 > 设计原则借鉴于 [github](https://developer.github.com/v3/)
 
 ## 什么是 RESTful
