@@ -28,7 +28,7 @@ Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中�
 .dockerignore 文件写不希望添加到镜像中的文件，比如 `node_modules`
 Dockerfile 是主角，内容如下：
 
-```
+```Dockerfile
 # 第一阶段，拉取 node 基础镜像并安装依赖，执行构建
 FROM node:11-alpine as builder
 

@@ -172,7 +172,7 @@ https://api.larabbs.com/
 
 例如
 
-```
+```json
 {
     "message": "422 Unprocessable Entity",
     "errors": {
@@ -184,7 +184,7 @@ https://api.larabbs.com/
 }
 ```
 
-```
+```json
 {
     "message": "您无权访问该订单",
     "status_code": 403
