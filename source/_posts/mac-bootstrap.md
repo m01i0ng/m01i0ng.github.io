@@ -116,6 +116,8 @@ brew install zsh
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ```
 
+> 注意使用 zsh 之后需要将以前 ~/.bash_profile ~/.bashrc 设置的环境变量等转移到 ~/.zshrc 中，例如上述的 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.zshrc
+
 更多介绍和使用方法[点击](https://github.com/robbyrussell/oh-my-zsh/)查看
 
 这里推荐几个很好用的插件：[Zsh Users](https://github.com/zsh-users)
