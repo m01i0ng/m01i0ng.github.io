@@ -3,8 +3,8 @@ title: Kubernetes 集群部署踩坑
 date: 2019-01-19 21:58:44
 tags:
   - k8s
-  - linux
-  - docker
+  - Linux
+  - Docker
 categories: k8s
 ---
 

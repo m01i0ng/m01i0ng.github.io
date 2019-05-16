@@ -2,9 +2,9 @@
 title: Mac 软件整理
 date: 2019-05-16 11:52:55
 tags:
-  - mac
-  - soft
-categories: mac
+  - Mac
+  - Soft
+categories: Mac
 ---
 
 ## 系统

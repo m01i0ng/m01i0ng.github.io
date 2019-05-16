@@ -2,8 +2,8 @@
 title: Mac 系统优化+通用开发环境搭建
 date: 2019-05-16 15:19:41
 tags:
-  - mac
-categories: mac
+  - Mac
+categories: Mac
 ---
 
 ## 系统配置优化
