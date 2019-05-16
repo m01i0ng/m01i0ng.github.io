@@ -7,6 +7,8 @@ tags:
 categories: Mac
 ---
 
+brew 的安装使用：[https://alley.js.org/2019/mac-bootstrap/#Brew](https://alley.js.org/2019/mac-bootstrap/#Brew)
+
 ## 系统
 
 ### Dozer
