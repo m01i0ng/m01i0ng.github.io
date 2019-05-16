@@ -1,5 +1,5 @@
 ---
-title: mac-soft-list
+title: Mac 软件整理
 date: 2019-05-16 11:52:55
 tags:
   - mac
