@@ -184,7 +184,7 @@ vim ~/.gradle/init.gradle
 ```
 
 ```groovy
-allprojects{
+allprojects {
     repositories {
         def ALIYUN_REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public'
         def ALIYUN_JCENTER_URL = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
