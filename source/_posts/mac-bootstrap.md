@@ -127,8 +127,18 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 
 使用 [nvm.sh](http://nvm.sh) 管理 Node 版本
 
+`npm i -g mirror-config-china` 配置所有中文镜像
+
 ### Python
 
 使用 [pyenv](https://github.com/pyenv/pyenv) 管理 Python 版本
 
 > pyenv install 时会遇到个报错，这里是其解决方式：
+
+### Java、Kotlin、Scala、Maven、Gradle
+
+[sdkman](https://sdkman.io/install)
+
+### Ruby
+
+[rbenv](https://github.com/rbenv/rbenv)
