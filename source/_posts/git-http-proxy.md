@@ -6,6 +6,8 @@ tags:
 categories: Git
 ---
 
+用于加速 `git@github.com` 的克隆方式
+
 ```bash
 git config --global http.proxy 'socks5://127.0.0.1:1086'
 # 或
