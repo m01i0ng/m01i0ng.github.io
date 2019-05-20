@@ -26,6 +26,14 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool t
 defaults write -globalDomain com.apple.keyboard.fnState -int 1
 ```
 
+### 关闭 SIP
+
+重启，按住 `cmd+r`，进入恢复模式，实用工具-终端，执行
+
+```bash
+csrutil disable
+```
+
 ### 关闭第三方程序验证
 
 我们或多或少会下载某些破解版的应用，此时直接打开很可能被系统拒绝，或者报错：无法打开已损坏的安装包。我们可以通过命令行关闭这一保（限）护（制）：
