@@ -60,6 +60,14 @@ defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 ```
 
+### Finder 快速预览增强
+
+> 需要先安装 brew
+
+```bash
+brew cask install qlcolorcode qlgradle qlmarkdown qlstephen qlvideo quicklook-json quicklookapk webpquicklook
+```
+
 ## Brew
 
 *nix 都有自带的包管理，用于管理软件包之间的依赖，如 RHEL 的 `yum`、Debian 的 `apt`，Mac 本身没有自带的包管理，单有这个第三方的实现 —— `HomeBrew`，一行命令安装：
