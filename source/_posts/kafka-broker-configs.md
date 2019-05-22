@@ -4,6 +4,7 @@ date: 2019-05-22 15:19:35
 tags:
   - Kafka
   - MQ
+  - Java
 categories: Kafka
 ---
 
