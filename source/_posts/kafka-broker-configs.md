@@ -32,5 +32,3 @@ Kafka 把所有的消息都保存在磁盘上，而这两个参数用来配置 K
 ## message.max.bytes
 
 该参数用来指定 broker 所能接收消息的最大值，默认值为1000012（B），约等于976.6KB。如果 Producer 发送的消息大于这个参数所设置的值，那么（Producer）就会报出 RecordTooLargeException 的异常。如果需要修改这个参数，那么还要考虑 `max.request.size`（客户端参数）、`max.message.bytes`（topic端参数）等参数的影响。为了避免修改此参数而引起级联的影响，建议在修改此参数之前考虑分拆消息的可行性。
-
-还有一些服务端参数在本节没有提及，这些参数同样非常重要，它们需要用单独的章节或者场景来描述，比如 `unclean.leader.election.enable`、`log.segment.bytes` 等参数都会在后面的章节中提及。
