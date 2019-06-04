@@ -9,6 +9,8 @@ categories: Mac
 
 brew 的安装使用：[https://alley.js.org/2019/mac-bootstrap/#Brew](https://alley.js.org/2019/mac-bootstrap/#Brew)
 
+> 如要查看软件官网只需执行 brew cask home ${软件名}
+
 ## 系统
 
 ### Dozer
@@ -71,7 +73,13 @@ VPN 连接
 
 `brew cask install typora`
 
-Markdown 编辑器
+Markdown 编辑器，干净，全平台支持，免费软件中最佳
+
+### mweb
+
+`brew cask install mweb`
+
+Markdown 编辑器，分类功能比较强，原生开发性能较高
 
 ### Pdf Expert
 
