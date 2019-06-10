@@ -150,7 +150,12 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 
 使用 [pyenv](https://github.com/pyenv/pyenv) 管理 Python 版本
 
-> pyenv install 时会遇到个报错，这里是其解决方式：
+> pyenv install 时会遇到个报错，之前先执行如下命令即可解决
+
+```bash
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+```
 
 ### Java、Kotlin、Scala、Maven、Gradle
 
