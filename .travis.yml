@@ -27,7 +27,7 @@ script:
   - hexo generate
 
 after_script:
-  - git config --global user.name "tinyalley"
+  - git config --global user.name "m01i0ng"
   - git config --global user.email "alley.ma@qq.com"
   - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
   - hexo deploy

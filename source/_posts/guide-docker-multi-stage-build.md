@@ -47,6 +47,6 @@ COPY --from=builder /tmp/build /usr/share/nginx/html
 EXPOSE 80
 ```
 
-执行 `docker build -t tinyalley/demo .` 就会生成镜像
+执行 `docker build -t m01i0ng/demo .` 就会生成镜像
 
 跟最终 release 镜像无关的文件依赖等等都要放在构建阶段
