@@ -83,16 +83,16 @@ brew cask install qlcolorcode qlgradle qlmarkdown qlstephen qlvideo quicklook-js
 Brew 自带的镜像源位于国外，不挂代理可能会很慢，这里推荐更换国内的阿里云镜像源：
 
 ```bash
-# 替换brew.git:
+# 替换核心库:
 cd "$(brew --repo)"
-git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
-# 替换homebrew-core.git:
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
-# 应用生效
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
 brew update
 # 替换homebrew-bottles:
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.bash_profile
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
@@ -101,7 +101,6 @@ source ~/.bash_profile
 基本的命令行工具可以直接用 `brew install` 安装，更多子命令直接执行 `brew` 即可查看：
 
 ```bash
-brew update
 brew install vim wget curl git 
 ```
 
@@ -138,28 +137,63 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 
 这里推荐几个很好用的插件：[Zsh Users](https://github.com/zsh-users)
 
+- 命令语法高亮
+
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+`plugins=( [plugins...] zsh-syntax-highlighting)`
+
+- 命令自动补全
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+`plugins=( [plugins...] zsh-autosuggestions)`
+
 ## 其他开发环境
 
 ### Node
 
-使用 [nvm.sh](http://nvm.sh) 管理 Node 版本
+#### 版本管理
+
+[nvm](http://nvm.sh)
+
+```bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | zsh
+```
+
+#### 镜像
 
 `npm i -g mirror-config-china` 配置所有中文镜像
 
 ### Python
 
-使用 [pyenv](https://github.com/pyenv/pyenv) 管理 Python 版本
+#### 版本管理
 
-> pyenv install 时会遇到个报错，之前先执行如下命令即可解决
+[pyenv](https://github.com/pyenv/pyenv)
 
 ```bash
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
+brew install pyenv
 ```
+
+#### pypi 镜像
+
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 ### Java、Kotlin、Scala、Maven、Gradle
 
+#### 版本管理
+
 [sdkman](https://sdkman.io/install)
+
+```bash
+curl -s "https://get.sdkman.io" | zsh
+```
+
+#### 镜像
 
 Maven 使用阿里云镜像：
 
@@ -259,4 +293,20 @@ allprojects {
 
 ### Ruby
 
+#### 版本管理
+
 [rbenv](https://github.com/rbenv/rbenv)
+
+```bash
+brew install rbenv
+```
+
+#### 镜像
+
+```bash
+# 添加 TUNA 源并移除默认源
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 列出已有源
+gem sources -l
+# 应该只有 TUNA 一个
+```
