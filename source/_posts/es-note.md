@@ -23,9 +23,11 @@ categories: es
 
 ### 索引
 
+定义，用于定义包含文档的字段名和字段类型
+
 | 名词 | 解释 |
 | --- | --- |
-| Index | 相似文档的集合，每个索引都有自己的 Mapping | 定义，用于定义包含文档的字段名和字段类型
+| Index | 相似文档的集合，每个索引都有自己的 Mapping | 
 | Shard | 体现了物理空间的概念，索引中的数据分布在 Shard 上 |
 | Mapping | 定义文档字段类型 |
 | Setting | 定义不同的数据分布，多少分片等等 |
@@ -231,7 +233,9 @@ Mapping 更新的规则：
     - Dynamic 设为 `true` 时，一旦有新增字段的文档写入，Mapping 同时被更新
     - Dynamic 设为 `false`，Mapping 不会被更新，新增字段无法被索引，但是信息会出现在 `_source` 中
     - Dynamic 设为 `strict`，文档写入失败
-    - ![pic](https://gitee.com/alley9469/pic/raw/master/content/Mixmyi.png)
+
+![pic](https://gitee.com/alley9469/pic/raw/master/content/Mixmyi.png)
+
 - 对已有字段：
     - 一旦已经有数据写入，就不再支持修改字段定义
     - 如果想改变字段类型必须 Reindex 重建索引
