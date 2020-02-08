@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Mac 开发环境搭建 | Untitled</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1581140513483">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://m01i0ng.js.org">
+        <img class="avatar" src="https://m01i0ng.js.org/images/avatar.png?v=1581140513483" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://m01i0ng.js.org">
+        <h1 class="site-title">Untitled</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Mac 开发环境搭建</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-02-08</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="系统配置优化">系统配置优化</h2>
+<h3 id="触摸板控制优化开启轻按点击功能">触摸板控制优化，开启轻按点击功能</h3>
+<pre><code class="language-bash">defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# 开启三指拖拽
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+</code></pre>
+<h3 id="将-f1-f12-用做标准功能键">将 F1-F12 用做标准功能键</h3>
+<pre><code class="language-bash">defaults write -globalDomain com.apple.keyboard.fnState -int 1
+</code></pre>
+<h3 id="关闭-sip">关闭 SIP</h3>
+<p>重启，按住 <code>cmd+r</code>，进入恢复模式，实用工具-终端，执行</p>
+<pre><code class="language-bash">csrutil disable
+</code></pre>
+<h3 id="关闭第三方程序验证">关闭第三方程序验证</h3>
+<p>我们或多或少会下载某些破解版的应用，此时直接打开很可能被系统拒绝，或者报错：无法打开已损坏的安装包。我们可以通过命令行关闭这一保（限）护（制）：</p>
+<pre><code class="language-bash">sudo spctl --master-disable
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+</code></pre>
+<h3 id="关闭镜像验证">关闭镜像验证</h3>
+<p>在打开 .dmg 格式的安装文件时，默认会先验证镜像，如果文件本身很大，验证的时间会很长，可以输入以下命令关闭验证：</p>
+<pre><code class="language-bash">defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+</code></pre>
+<h3 id="完全键盘控制">完全键盘控制</h3>
+<p>很多操作都会弹出系统的对话框，要求我们确认或者取消，如果没有开启完全键盘控制，我们只能按回车键确认，或者移动鼠标选择取消。如果开启了完全键盘控制，只要按下空格键，就相当于选中蓝色边框的按钮。按下 Tab 键可以在多个按钮之间切换。</p>
+<pre><code class="language-bash">defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+</code></pre>
+<h3 id="finder-快速预览增强">Finder 快速预览增强</h3>
+<blockquote>
+<p>需要先安装 brew</p>
+</blockquote>
+<pre><code class="language-bash">brew cask install qlcolorcode qlgradle qlmarkdown qlstephen qlvideo quicklook-json quicklookapk webpquicklook
+</code></pre>
+<h2 id="brew">Brew</h2>
+<p>*nix 都有自带的包管理，用于管理软件包之间的依赖，如 RHEL 的 <code>yum</code>、Debian 的 <code>apt</code>，Mac 本身没有自带的包管理，单有这个第三方的实现 —— <code>HomeBrew</code>，一行命令安装：</p>
+<pre><code class="language-bash">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<p>安装过程中需要输入密码并下载 <code>Command Line Tools</code>，视网络情况快慢不一</p>
+<h3 id="更换镜像源">更换镜像源</h3>
+<p>Brew 自带的镜像源位于国外，不挂代理可能会很慢，这里推荐更换国内的阿里云镜像源：</p>
+<pre><code class="language-bash"># 替换核心库:
+cd &quot;$(brew --repo)&quot;
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+brew update
+# 替换homebrew-bottles:
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+<h3 id="安装命令行工具">安装命令行工具</h3>
+<p>基本的命令行工具可以直接用 <code>brew install</code> 安装，更多子命令直接执行 <code>brew</code> 即可查看：</p>
+<pre><code class="language-bash">brew install vim wget curl git 
+</code></pre>
+<h3 id="安装一般图形化软件">安装一般图形化软件</h3>
+<p>如微信、QQ 或是 Intellij Idea 等开发工具，也可以用 Brew 安装：</p>
+<pre><code class="language-bash">brew cask install wechat qq intellij-idea
+</code></pre>
+<h3 id="查找">查找</h3>
+<p>执行 <code>brew search xxx</code> 即可从软件源中查找，之后从结果列表中取名字安装即可，其中 <code>Formulae</code> 子项下的 <code>brew install xxx</code>，<code>Casks</code> 子项下的 <code>brew cask install xxx</code></p>
+<h2 id="oh-my-zsh">Oh My Zsh</h2>
+<p>此处引官方描述：</p>
+<pre><code>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...
+</code></pre>
+<p>简单说是对默认终端的一个功能增强，还是极大的增强，可以添加各种自定义主题插件等，一行命令安装：</p>
+<pre><code class="language-bash">brew install zsh
+sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
+</code></pre>
+<blockquote>
+<p>注意使用 zsh 之后需要将以前 ~/.bash_profile ~/.bashrc 设置的环境变量等转移到 ~/.zshrc 中，例如上述的 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' &gt;&gt; ~/.zshrc</p>
+</blockquote>
+<p>更多介绍和使用方法<a href="https://github.com/robbyrussell/oh-my-zsh/">点击</a>查看</p>
+<p>这里推荐几个很好用的插件：<a href="https://github.com/zsh-users">Zsh Users</a></p>
+<ul>
+<li>命令语法高亮</li>
+</ul>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+</code></pre>
+<p><code>plugins=( [plugins...] zsh-syntax-highlighting)</code></p>
+<ul>
+<li>命令自动补全</li>
+</ul>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+</code></pre>
+<p><code>plugins=( [plugins...] zsh-autosuggestions)</code></p>
+<h2 id="其他开发环境">其他开发环境</h2>
+<h3 id="node">Node</h3>
+<h4 id="版本管理">版本管理</h4>
+<p><a href="http://nvm.sh">nvm</a></p>
+<pre><code class="language-bash">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | zsh
+</code></pre>
+<h4 id="镜像">镜像</h4>
+<p><code>npm i -g mirror-config-china</code> 配置所有中文镜像</p>
+<h3 id="python">Python</h3>
+<h4 id="版本管理-2">版本管理</h4>
+<p><a href="https://github.com/pyenv/pyenv">pyenv</a></p>
+<pre><code class="language-bash">brew install pyenv
+</code></pre>
+<h4 id="pypi-镜像">pypi 镜像</h4>
+<p>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</p>
+<h3 id="java-kotlin-scala-maven-gradle">Java、Kotlin、Scala、Maven、Gradle</h3>
+<h4 id="版本管理-3">版本管理</h4>
+<p><a href="https://sdkman.io/install">sdkman</a></p>
+<pre><code class="language-bash">curl -s &quot;https://get.sdkman.io&quot; | zsh
+</code></pre>
+<h4 id="镜像-2">镜像</h4>
+<p>Maven 使用阿里云镜像：</p>
+<p>全局</p>
+<pre><code class="language-bash">vim ~/.m2/settings.xml
+</code></pre>
+<pre><code class="language-xml">&lt;settings&gt;
+    &lt;mirrors&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;aliyunmaven&lt;/id&gt;
+            &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+            &lt;name&gt;阿里云公共仓库&lt;/name&gt;
+            &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+        &lt;/mirror&gt;
+    &lt;/mirrors&gt;
+&lt;/settings&gt;
+</code></pre>
+<p>项目级</p>
+<p><code>pom.xml</code></p>
+<pre><code class="language-xml">&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;aliyunmaven&lt;/id&gt;
+        &lt;name&gt;阿里云公共仓库&lt;/name&gt;
+        &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre>
+<p>Gradle 使用阿里云镜像：</p>
+<p>全局</p>
+<pre><code class="language-bash">vim ~/.gradle/init.gradle
+</code></pre>
+<pre><code class="language-groovy">allprojects {
+    repositories {
+        def ALIYUN_REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public'
+        def ALIYUN_JCENTER_URL = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        all { ArtifactRepository repo -&gt;
+            if(repo instanceof MavenArtifactRepository){
+                def url = repo.url.toString()
+                if (url.startsWith('https://repo1.maven.org/maven2')) {
+                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL.&quot;
+                    remove repo
+                }
+                if (url.startsWith('https://jcenter.bintray.com/')) {
+                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_JCENTER_URL.&quot;
+                    remove repo
+                }
+            }
+        }
+        maven {
+            url ALIYUN_REPOSITORY_URL
+            url ALIYUN_JCENTER_URL
+        }
+    }
+}
+</code></pre>
+<p>项目级</p>
+<p><code>build.gradle</code></p>
+<pre><code class="language-groovy">
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }        
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    }
+}
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<h4 id="版本管理-4">版本管理</h4>
+<p><a href="https://github.com/rbenv/rbenv">rbenv</a></p>
+<pre><code class="language-bash">brew install rbenv
+</code></pre>
+<h4 id="镜像-3">镜像</h4>
+<pre><code class="language-bash"># 添加 TUNA 源并移除默认源
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 列出已有源
+gem sources -l
+# 应该只有 TUNA 一个
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://m01i0ng.js.org/post/linux-gui-na">
+              <h3 class="post-title">
+                下一篇：Linux 归纳
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://m01i0ng.js.org/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '4fc683c05fc3ba5bcf66',
+        clientSecret: 'eaf39a9547e39a17b74ee130e79385f8117827ae',
+        repo: 'm01i0ng.github.io',
+        owner: 'm01i0ng',
+        admin: ['m01i0ng'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

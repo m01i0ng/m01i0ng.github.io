@@ -5,14 +5,14 @@
     
 <meta charset="utf-8" >
 
-<title>Hello Gridea | Untitled</title>
+<title>Docker 镜像的分阶段构建 | Untitled</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1580994369878">
+<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1581140513483">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://m01i0ng.js.org">
-        <img class="avatar" src="https://m01i0ng.js.org/images/avatar.png?v=1580994369878" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://m01i0ng.js.org/images/avatar.png?v=1581140513483" alt="" width="32px" height="32px">
       </a>
       <a href="https://m01i0ng.js.org">
         <h1 class="site-title">Untitled</h1>
@@ -86,18 +86,15 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('https://m01i0ng.js.org/post-images/hello-gridea.png')">
-            </div>
-          
-          <h2 class="post-title">Hello Gridea</h2>
+          <h2 class="post-title">Docker 镜像的分阶段构建</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2018-12-12</span>
+            <span><i class="icon-calendar-outline"></i> 2020-02-08</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://m01i0ng.js.org/tag/54Iw76IwY">
-                    Gridea
+                  <a href="https://m01i0ng.js.org/tag/sPUrg8x7B">
+                    Docker
                     
                   </a>
                 
@@ -105,32 +102,54 @@
             
           </div>
           <div class="post-content">
-            <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+            <p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
+一些语言项目例如前端、Go 等，其构建阶段需要一堆依赖如 <code>node_modules</code>、<code>vendor</code> 等，但运行阶段只需要 build 出来的静态页面或二进制文件，所以要将构建和运行分开为两个阶段，最终镜像中只包含 build 的结果</p>
+<p>以前端项目举例，目录结构如下：</p>
+<pre><code>├── .docker
+├── .dockerignore
+├── Dockerfile
+├── README.md
+├── node_modules
+├── package.json
+├── public
+├── src
+└── yarn.lock
+</code></pre>
+<p>.docker 文件夹中存放了 nginx 的配置<br>
+.dockerignore 文件写不希望添加到镜像中的文件，比如 <code>node_modules</code><br>
+Dockerfile 是主角，内容如下：</p>
+<pre><code class="language-Dockerfile"># 第一阶段，拉取 node 基础镜像并安装依赖，执行构建
+FROM node:11-alpine as builder
+
+WORKDIR /tmp
+COPY . .
+RUN npm config set registry https://registry.npm.taobao.org \
+    &amp;&amp; npm i -g yarn
+RUN yarn &amp;&amp; yarn build
+
+# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际 release 的镜像中，会丢弃第一阶段中其他的文件
+FROM nginx:alpine
+
+COPY .docker/conf/default.conf /etc/nginx/conf.d/
+COPY --from=builder /tmp/build /usr/share/nginx/html
+
+EXPOSE 80
+</code></pre>
+<p>执行 <code>docker build -t m01i0ng/demo .</code> 就会生成镜像</p>
+<p>跟最终 release 镜像无关的文件依赖等等都要放在构建阶段</p>
 
           </div>
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi">
+              <h3 class="post-title">
+                下一篇：规范你的 commit 信息
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       

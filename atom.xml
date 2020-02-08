@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-02-06T13:06:11.925Z</updated>
+    <updated>2020-02-08T05:42:19.640Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -11,35 +11,714 @@
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://m01i0ng.js.org/post/hello-gridea</id>
-        <link href="https://m01i0ng.js.org/post/hello-gridea">
+        <title type="html"><![CDATA[Mac 软件]]></title>
+        <id>https://m01i0ng.js.org/post/mac-ruan-jian</id>
+        <link href="https://m01i0ng.js.org/post/mac-ruan-jian">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2020-02-08T05:41:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="系统">系统</h2>
+<h3 id="dozer">Dozer</h3>
+<p><code>brew cask install dozer</code></p>
+<p>折叠状态栏菜单，与之相对的一款收费软件为 <code>Bartender</code></p>
+<h3 id="spectacle">Spectacle</h3>
+<p><code>brew cask install spectacle</code></p>
+<p>快捷改变窗口尺寸，功能类似 <code>Magnet</code></p>
+<h3 id="scroll-reverser">Scroll Reverser</h3>
+<p><code>brew cask install scroll-reverser</code></p>
+<p>翻转滚轮方向</p>
+<h3 id="karabiner-elements">Karabiner Elements</h3>
+<p><code>brew cask install karabiner-elements</code></p>
+<p>键盘重新映射</p>
+<h3 id="tencent-lemon">Tencent Lemon</h3>
+<p><code>brew cask install tencent-lemon</code></p>
+<p>系统清理、网速硬盘等状态栏显示，相当于免费版 <code>CleanMyMac</code></p>
+<h3 id="iina">iina</h3>
+<p><code>brew cask install iina</code></p>
+<p>播放器</p>
+<h3 id="hand-brake">Hand Brake</h3>
+<p><code>brew cask install handbrake</code></p>
+<p>视频转码</p>
+<h3 id="night-owl">Night Owl</h3>
+<p><code>brew cask install nightowl</code></p>
+<p>定时自动切换黑暗模式</p>
+<h3 id="tunnel-blick">Tunnel Blick</h3>
+<p><code>brew cask install tunnelblick-beta</code></p>
+<p>VPN 连接</p>
+<h2 id="写作">写作</h2>
+<h3 id="typora">Typora</h3>
+<p><code>brew cask install typora</code></p>
+<p>Markdown 编辑器，干净，全平台支持，免费软件中最佳</p>
+<h3 id="mweb">mweb</h3>
+<p><code>brew cask install mweb</code></p>
+<p>Markdown 编辑器，分类功能比较强，原生开发性能较高</p>
+<h3 id="pdf-expert">Pdf Expert</h3>
+<p><code>brew cask install pdf-expert</code></p>
+<p>pdf 阅读器</p>
+<h2 id="开发">开发</h2>
+<h3 id="iterm2">iTerm2</h3>
+<p><code>brew cask install iterm2</code></p>
+<p>终端模拟器</p>
+<h3 id="visual-studio-code">Visual Studio Code</h3>
+<p><code>brew cask install visual-sdudio-code</code></p>
+<p>代码编辑器</p>
+<h3 id="sequel-pro">Sequel Pro</h3>
+<p><code>brew cask install sequel-pro-nightly</code></p>
+<p>MySQL 可视化工具</p>
+<h3 id="vmware-fusion">Vmware Fusion</h3>
+<p><code>brew cask install vmware-fusion</code></p>
+<p>Vmware 虚拟机</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mac 开发环境搭建]]></title>
+        <id>https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian</id>
+        <link href="https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian">
+        </link>
+        <updated>2020-02-08T05:40:55.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="系统配置优化">系统配置优化</h2>
+<h3 id="触摸板控制优化开启轻按点击功能">触摸板控制优化，开启轻按点击功能</h3>
+<pre><code class="language-bash">defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# 开启三指拖拽
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+</code></pre>
+<h3 id="将-f1-f12-用做标准功能键">将 F1-F12 用做标准功能键</h3>
+<pre><code class="language-bash">defaults write -globalDomain com.apple.keyboard.fnState -int 1
+</code></pre>
+<h3 id="关闭-sip">关闭 SIP</h3>
+<p>重启，按住 <code>cmd+r</code>，进入恢复模式，实用工具-终端，执行</p>
+<pre><code class="language-bash">csrutil disable
+</code></pre>
+<h3 id="关闭第三方程序验证">关闭第三方程序验证</h3>
+<p>我们或多或少会下载某些破解版的应用，此时直接打开很可能被系统拒绝，或者报错：无法打开已损坏的安装包。我们可以通过命令行关闭这一保（限）护（制）：</p>
+<pre><code class="language-bash">sudo spctl --master-disable
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+</code></pre>
+<h3 id="关闭镜像验证">关闭镜像验证</h3>
+<p>在打开 .dmg 格式的安装文件时，默认会先验证镜像，如果文件本身很大，验证的时间会很长，可以输入以下命令关闭验证：</p>
+<pre><code class="language-bash">defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+</code></pre>
+<h3 id="完全键盘控制">完全键盘控制</h3>
+<p>很多操作都会弹出系统的对话框，要求我们确认或者取消，如果没有开启完全键盘控制，我们只能按回车键确认，或者移动鼠标选择取消。如果开启了完全键盘控制，只要按下空格键，就相当于选中蓝色边框的按钮。按下 Tab 键可以在多个按钮之间切换。</p>
+<pre><code class="language-bash">defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+</code></pre>
+<h3 id="finder-快速预览增强">Finder 快速预览增强</h3>
+<blockquote>
+<p>需要先安装 brew</p>
+</blockquote>
+<pre><code class="language-bash">brew cask install qlcolorcode qlgradle qlmarkdown qlstephen qlvideo quicklook-json quicklookapk webpquicklook
+</code></pre>
+<h2 id="brew">Brew</h2>
+<p>*nix 都有自带的包管理，用于管理软件包之间的依赖，如 RHEL 的 <code>yum</code>、Debian 的 <code>apt</code>，Mac 本身没有自带的包管理，单有这个第三方的实现 —— <code>HomeBrew</code>，一行命令安装：</p>
+<pre><code class="language-bash">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<p>安装过程中需要输入密码并下载 <code>Command Line Tools</code>，视网络情况快慢不一</p>
+<h3 id="更换镜像源">更换镜像源</h3>
+<p>Brew 自带的镜像源位于国外，不挂代理可能会很慢，这里推荐更换国内的阿里云镜像源：</p>
+<pre><code class="language-bash"># 替换核心库:
+cd &quot;$(brew --repo)&quot;
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+brew update
+# 替换homebrew-bottles:
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+<h3 id="安装命令行工具">安装命令行工具</h3>
+<p>基本的命令行工具可以直接用 <code>brew install</code> 安装，更多子命令直接执行 <code>brew</code> 即可查看：</p>
+<pre><code class="language-bash">brew install vim wget curl git 
+</code></pre>
+<h3 id="安装一般图形化软件">安装一般图形化软件</h3>
+<p>如微信、QQ 或是 Intellij Idea 等开发工具，也可以用 Brew 安装：</p>
+<pre><code class="language-bash">brew cask install wechat qq intellij-idea
+</code></pre>
+<h3 id="查找">查找</h3>
+<p>执行 <code>brew search xxx</code> 即可从软件源中查找，之后从结果列表中取名字安装即可，其中 <code>Formulae</code> 子项下的 <code>brew install xxx</code>，<code>Casks</code> 子项下的 <code>brew cask install xxx</code></p>
+<h2 id="oh-my-zsh">Oh My Zsh</h2>
+<p>此处引官方描述：</p>
+<pre><code>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...
+</code></pre>
+<p>简单说是对默认终端的一个功能增强，还是极大的增强，可以添加各种自定义主题插件等，一行命令安装：</p>
+<pre><code class="language-bash">brew install zsh
+sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
+</code></pre>
+<blockquote>
+<p>注意使用 zsh 之后需要将以前 ~/.bash_profile ~/.bashrc 设置的环境变量等转移到 ~/.zshrc 中，例如上述的 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' &gt;&gt; ~/.zshrc</p>
+</blockquote>
+<p>更多介绍和使用方法<a href="https://github.com/robbyrussell/oh-my-zsh/">点击</a>查看</p>
+<p>这里推荐几个很好用的插件：<a href="https://github.com/zsh-users">Zsh Users</a></p>
+<ul>
+<li>命令语法高亮</li>
+</ul>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+</code></pre>
+<p><code>plugins=( [plugins...] zsh-syntax-highlighting)</code></p>
+<ul>
+<li>命令自动补全</li>
+</ul>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+</code></pre>
+<p><code>plugins=( [plugins...] zsh-autosuggestions)</code></p>
+<h2 id="其他开发环境">其他开发环境</h2>
+<h3 id="node">Node</h3>
+<h4 id="版本管理">版本管理</h4>
+<p><a href="http://nvm.sh">nvm</a></p>
+<pre><code class="language-bash">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | zsh
+</code></pre>
+<h4 id="镜像">镜像</h4>
+<p><code>npm i -g mirror-config-china</code> 配置所有中文镜像</p>
+<h3 id="python">Python</h3>
+<h4 id="版本管理-2">版本管理</h4>
+<p><a href="https://github.com/pyenv/pyenv">pyenv</a></p>
+<pre><code class="language-bash">brew install pyenv
+</code></pre>
+<h4 id="pypi-镜像">pypi 镜像</h4>
+<p>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</p>
+<h3 id="java-kotlin-scala-maven-gradle">Java、Kotlin、Scala、Maven、Gradle</h3>
+<h4 id="版本管理-3">版本管理</h4>
+<p><a href="https://sdkman.io/install">sdkman</a></p>
+<pre><code class="language-bash">curl -s &quot;https://get.sdkman.io&quot; | zsh
+</code></pre>
+<h4 id="镜像-2">镜像</h4>
+<p>Maven 使用阿里云镜像：</p>
+<p>全局</p>
+<pre><code class="language-bash">vim ~/.m2/settings.xml
+</code></pre>
+<pre><code class="language-xml">&lt;settings&gt;
+    &lt;mirrors&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;aliyunmaven&lt;/id&gt;
+            &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+            &lt;name&gt;阿里云公共仓库&lt;/name&gt;
+            &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+        &lt;/mirror&gt;
+    &lt;/mirrors&gt;
+&lt;/settings&gt;
+</code></pre>
+<p>项目级</p>
+<p><code>pom.xml</code></p>
+<pre><code class="language-xml">&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;aliyunmaven&lt;/id&gt;
+        &lt;name&gt;阿里云公共仓库&lt;/name&gt;
+        &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre>
+<p>Gradle 使用阿里云镜像：</p>
+<p>全局</p>
+<pre><code class="language-bash">vim ~/.gradle/init.gradle
+</code></pre>
+<pre><code class="language-groovy">allprojects {
+    repositories {
+        def ALIYUN_REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public'
+        def ALIYUN_JCENTER_URL = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        all { ArtifactRepository repo -&gt;
+            if(repo instanceof MavenArtifactRepository){
+                def url = repo.url.toString()
+                if (url.startsWith('https://repo1.maven.org/maven2')) {
+                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL.&quot;
+                    remove repo
+                }
+                if (url.startsWith('https://jcenter.bintray.com/')) {
+                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_JCENTER_URL.&quot;
+                    remove repo
+                }
+            }
+        }
+        maven {
+            url ALIYUN_REPOSITORY_URL
+            url ALIYUN_JCENTER_URL
+        }
+    }
+}
+</code></pre>
+<p>项目级</p>
+<p><code>build.gradle</code></p>
+<pre><code class="language-groovy">
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }        
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    }
+}
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<h4 id="版本管理-4">版本管理</h4>
+<p><a href="https://github.com/rbenv/rbenv">rbenv</a></p>
+<pre><code class="language-bash">brew install rbenv
+</code></pre>
+<h4 id="镜像-3">镜像</h4>
+<pre><code class="language-bash"># 添加 TUNA 源并移除默认源
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+# 列出已有源
+gem sources -l
+# 应该只有 TUNA 一个
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux 归纳]]></title>
+        <id>https://m01i0ng.js.org/post/linux-gui-na</id>
+        <link href="https://m01i0ng.js.org/post/linux-gui-na">
+        </link>
+        <updated>2020-02-08T05:40:16.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="系统优化">系统优化</h2>
+<h3 id="ct-7-磁盘扩容">CT 7 磁盘扩容</h3>
+<blockquote>
+<p>场景：VM 虚拟机磁盘分配不足后期添加并扩容至主分区</p>
+</blockquote>
+<ul>
+<li>查看系统挂载信息</li>
+</ul>
+<p><code>df -h</code></p>
+<ul>
+<li>
+<p>在 VM 设置中扩展磁盘</p>
+</li>
+<li>
+<p>对新增加的硬盘进行分区、格式化</p>
+</li>
+</ul>
+<pre><code class="language-bash"># 我们增加了空间的硬盘是 /dev/sda
+
+# 分区：
+[root@localhost]# fdisk /dev/sda　　　　
+p　　　　　　　查看已分区数量（我看到有两个 /dev/sda1 /dev/sda2）
+n　　　　　　　新增加一个分区
+p　　　　　　　分区类型我们选择为主分区
+　　　　　　     分区号输入3（因为1,2已经用过了,sda1是分区1,sda2是分区2,sda3分区3）
+回车　　　　　  默认（起始扇区）
+回车　　　　　  默认（结束扇区）
+t　　　　　　　 修改分区类型
+　　　　　　     选分区3
+8e　　　　　 　修改为LVM（8e就是LVM）
+w　　　　　  　写分区表
+q　　　　　  　完成，退出fdisk命令
+
+# 使用partprobe 命令 或者重启机器 
+
+# 格式化分区3命令:
+
+mkfs.ext3 /dev/sda3
+</code></pre>
+<ul>
+<li>添加新 LVM 至已有 LVM 组，实现扩容</li>
+</ul>
+<pre><code class="language-bash">lvm　　　　　　　　　　　　           进入lvm管理
+
+lvm&gt;pvcreate /dev/sda3　　           这是初始化刚才的分区3
+
+lvm&gt;vgextend centos /dev/sda3     将初始化过的分区加入到虚拟卷组centos (卷和卷组的命令可以通过 vgdisplay )
+
+lvm&gt;vgdisplay -v 或 者vgdisplay 查看 free PE /Site
+
+lvm&gt;lvextend -l+6143 /dev/mapper/centos-root　　扩展已有卷的容量（6143 是通过vgdisplay查看free PE /Site的大小）
+
+lvm&gt;pvdisplay 查看卷容量，这时你会看到一个很大的卷了
+
+lvm&gt;quit 　退出
+</code></pre>
+<p>接着输入以下命令：</p>
+<p><code>xfs_growfs /dev/mapper/centos-root</code></p>
+<p>重复执行 <code>df -h</code> 验证</p>
+<h3 id="添加-swap-空间">添加 Swap 空间</h3>
+<ul>
+<li>制作 Swapfile 文件</li>
+</ul>
+<p>Linux：<code>fallocate -l 4G /swapfile &amp;&amp; chmod 600 /swapfile</code></p>
+<p>CentOS：<code>dd if=/dev/zero of=/swapfile count=4096 bs=1MiB &amp;&amp; chmod 600 /swapfile</code></p>
+<ul>
+<li>格式化交换空间</li>
+</ul>
+<p><code>mkswap /swapfile</code></p>
+<ul>
+<li>开启交换空间</li>
+</ul>
+<p><code>swapon /swapfile</code></p>
+<ul>
+<li>开机自动挂载</li>
+</ul>
+<p><code>vim /etc/fstab</code> 把原有交换空间文件替换为新的</p>
+<h3 id="设置时区">设置时区</h3>
+<ul>
+<li>查看可用时区</li>
+</ul>
+<p><code>timedatectl list-timezones</code></p>
+<ul>
+<li>设置时区</li>
+</ul>
+<p><code>timedatectl set-timezone Asia/Shanghai</code></p>
+<ul>
+<li>更新</li>
+</ul>
+<p><code>timedatectl</code></p>
+<h3 id="设置-ntp">设置 NTP</h3>
+<ul>
+<li>安装 NTP</li>
+</ul>
+<p><code>yum install -y ntp</code></p>
+<ul>
+<li>开启</li>
+</ul>
+<p><code>systemctl start ntpd &amp;&amp; systemctl enable ntpd</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用 Kubeadm 快速创建 K8S 集群]]></title>
+        <id>https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun</id>
+        <link href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun">
+        </link>
+        <updated>2020-02-08T05:39:13.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="环境架构">环境架构</h2>
+<h3 id="服务器">服务器</h3>
+<ul>
+<li>192.168.1.220 k8s-master</li>
+<li>192.168.1.221 k8s-node-1</li>
+<li>192.168.1.223 k8s-node-2</li>
+</ul>
+<h3 id="系统centos-74">系统：centos 7.4</h3>
+<h3 id="集群部署方式kubeadm">集群部署方式：kubeadm</h3>
+<h2 id="系统配置">系统配置</h2>
+<h3 id="配置主机映射">配置主机映射</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">cat &gt; /etc/hosts &lt;&lt; EOF
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.1.220 k8s-master
+192.168.1.221 k8s-node-1
+192.168.1.223 k8s-node-2
+EOF
+</code></pre>
+<h3 id="禁用-selinux">禁用 selinux</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">sed -i &quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/sysconfig/selinux
+sed -i &quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/selinux/config
+sed -i &quot;s/^SELINUX=permissive/SELINUX=disabled/g&quot; /etc/sysconfig/selinux
+sed -i &quot;s/^SELINUX=permissive/SELINUX=disabled/g&quot; /etc/selinux/config
+setenforce 0
+</code></pre>
+<h3 id="禁用防火墙">禁用防火墙</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">systemctl disable firewalld &amp;&amp; systemctl stop firewalld
+</code></pre>
+<h3 id="关闭交换分区">关闭交换分区</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">sed -i 's/.*swap.*/#&amp;/' /etc/fstab
+swapoff -a
+</code></pre>
+<h3 id="配置转发参数">配置转发参数</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+vm.swappiness=0
+EOF
+sysctl --system
+</code></pre>
+<h3 id="加载-ipvs-相关内核模块">加载 ipvs 相关内核模块</h3>
+<p>所有节点</p>
+<pre><code class="language-bash"># 如果重新开机，需要重新加载
+modprobe ip_vs
+modprobe ip_vs_rr
+modprobe ip_vs_wrr
+modprobe ip_vs_sh
+modprobe nf_conntrack_ipv4
+lsmod | grep ip_vs
+</code></pre>
+<h2 id="安装配置-docker">安装配置 Docker</h2>
+<p>k8s v1.11.0 版本推荐使用 Docker v17.03，经测试 v1.13 也能正常使用，而最新的 v18.05 会产生警告，并无法使用资源限制</p>
+<h3 id="安装-docker">安装 Docker</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">yum install -y docker &amp;&amp;\
+systemctl enable docker &amp;&amp;\
+systemctl start docker
+</code></pre>
+<h3 id="配置国内镜像">配置国内镜像</h3>
+<p>所有节点</p>
+<pre><code class="language-bash">cat &gt; /etc/docker/daemon.json &lt;&lt; EOF
+{
+  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
+</code></pre>
+<h2 id="安装配置-kubernetes">安装配置 Kubernetes</h2>
+<h3 id="安装-kubernetes">安装 Kubernetes</h3>
+<p>所有节点</p>
+<pre><code class="language-bash"># 配置源
+cat &gt; /etc/yum.repos.d/kubernetes.repo &lt;&lt; EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+# 安装
+yum install -y kubelet kubeadm kubectl ipvsadm
+</code></pre>
+<h3 id="配置启动-kubelet">配置启动 Kubelet</h3>
+<p>所有节点</p>
+<pre><code class="language-bash"># 配置kubelet使用国内pause镜像
+# 配置kubelet的cgroups
+# 获取docker的cgroups
+DOCKER_CGROUPS=$(docker info | grep 'Cgroup' | cut -d' ' -f3)
+echo $DOCKER_CGROUPS
+cat &gt; /etc/sysconfig/kubelet &lt;&lt; EOF
+KUBELET_EXTRA_ARGS=&quot;--cgroup-driver=$DOCKER_CGROUPS --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1&quot;
+EOF
+
+# 启动
+systemctl daemon-reload
+systemctl enable kubelet &amp;&amp; systemctl start kubelet
+</code></pre>
+<h3 id="配置-master-节点">配置 master 节点</h3>
+<p>master 节点</p>
+<pre><code class="language-bash"># 生成配置文件
+cat &gt; kubeadm-master.config &lt;&lt; EOF
+apiVersion: kubeadm.k8s.io/v1alpha2
+kind: MasterConfiguration
+kubernetesVersion: v1.11.0
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+api:
+  # master 节点 ip
+  advertiseAddress: 192.168.1.220
+
+controllerManagerExtraArgs:
+  node-monitor-grace-period: 10s
+  pod-eviction-timeout: 10s
+
+networking:
+  podSubnet: 10.244.0.0/16
+
+kubeProxy:
+  config:
+    # mode: ipvs
+    mode: iptables
+EOF
+</code></pre>
+<pre><code class="language-bash"># 提前拉取镜像，如果失败可以多次尝试
+kubeadm config images pull --config kubeadm-master.config
+</code></pre>
+<pre><code class="language-bash"># 启动
+kubeadm init --config kubeadm-master.config
+</code></pre>
+<p>如以上命令没有出错，会出现类似 <code>kubeadm --join xxx</code> 的说明</p>
+<pre><code class="language-bash">rm -rf $HOME/.kube
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre>
+<p>执行 <code>kubectl get nodes</code> 查看节点，此时状态应该为 NotReady，接着开始配置 <code>flannel</code> 网络插件</p>
+<pre><code class="language-bash"># 修改镜像
+wgte https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml
+sed -i 's/k8s.gcr.io/registry.cn-shanghai.aliyuncs.com\/gcr-k8s/g' kube-flannel.yaml
+</code></pre>
+<pre><code class="language-bash"># 部署
+kubectl apply -f kube-flannel.yml
+</code></pre>
+<p>查看（需要时间配置，可反复执行第一条查看直到 <code>pods</code> 状态全为 <code>Running</code>）</p>
+<pre><code class="language-bash">kubectl get po -n kube-system
+kubectl get svc -n kube-system
+</code></pre>
+<p>配置好网络之后 kubeadm 会自动部署 coredns，再执行 <code>kubectl get nodes</code>，此时 <code>master</code> 节点状态应该为 <code>Ready</code></p>
+<h3 id="配置子节点">配置子节点</h3>
+<p>node-1、node-2 节点</p>
+<p><code>master</code> 节点执行 <code>kubeadm token create --print-join-command</code>，将结果复制，到 <code>node</code> 上执行，加入集群，如果执行失败可能是 <code>selinux</code> 没关（我在此处困了很久……），最后在 <code>master</code> 节点执行 <code>kubectl get node</code>，应该会看见加入进来的节点</p>
+<h2 id="测试集群">测试集群</h2>
+<p>master 节点</p>
+<p>部署 deploy</p>
+<pre><code class="language-bash">kubectl run nginx --replicas=2 --image=nginx:alpine --port=80
+kubectl expose deployment nginx --type=NodePort --name=test-service-nodeport
+kubectl expose deployment nginx --name=test-service
+
+kubectl describe svc test-service
+</code></pre>
+<p>访问测试，32340 为上面最后一条命令查看 svc 时获取的端口</p>
+<p>浏览器打开 <code>http://&lt;master-ip&gt;:&lt;32340&gt;</code> 会返回 nginx 的欢迎界面</p>
+<p>清理删除</p>
+<pre><code class="language-bash">kubectl delete svc test-service test-service-nodeport
+kubectl delete deploy nginx
+</code></pre>
+<h2 id="结束">结束</h2>
+<ul>
+<li>部署完成之后想增加节点只要按照子节点部署的步骤进行即可，之后可以参考官方文档安装 <code>dashboard heapster</code> 等插件</li>
+<li>此为单主多子节点配置，多主多子配置方法有所不同，日后再说--</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Docker 镜像的分阶段构建]]></title>
+        <id>https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian</id>
+        <link href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian">
+        </link>
+        <updated>2020-02-08T05:37:14.000Z</updated>
+        <content type="html"><![CDATA[<p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
+一些语言项目例如前端、Go 等，其构建阶段需要一堆依赖如 <code>node_modules</code>、<code>vendor</code> 等，但运行阶段只需要 build 出来的静态页面或二进制文件，所以要将构建和运行分开为两个阶段，最终镜像中只包含 build 的结果</p>
+<p>以前端项目举例，目录结构如下：</p>
+<pre><code>├── .docker
+├── .dockerignore
+├── Dockerfile
+├── README.md
+├── node_modules
+├── package.json
+├── public
+├── src
+└── yarn.lock
+</code></pre>
+<p>.docker 文件夹中存放了 nginx 的配置<br>
+.dockerignore 文件写不希望添加到镜像中的文件，比如 <code>node_modules</code><br>
+Dockerfile 是主角，内容如下：</p>
+<pre><code class="language-Dockerfile"># 第一阶段，拉取 node 基础镜像并安装依赖，执行构建
+FROM node:11-alpine as builder
+
+WORKDIR /tmp
+COPY . .
+RUN npm config set registry https://registry.npm.taobao.org \
+    &amp;&amp; npm i -g yarn
+RUN yarn &amp;&amp; yarn build
+
+# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际 release 的镜像中，会丢弃第一阶段中其他的文件
+FROM nginx:alpine
+
+COPY .docker/conf/default.conf /etc/nginx/conf.d/
+COPY --from=builder /tmp/build /usr/share/nginx/html
+
+EXPOSE 80
+</code></pre>
+<p>执行 <code>docker build -t m01i0ng/demo .</code> 就会生成镜像</p>
+<p>跟最终 release 镜像无关的文件依赖等等都要放在构建阶段</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[规范你的 commit 信息]]></title>
+        <id>https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi</id>
+        <link href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi">
+        </link>
+        <updated>2020-02-08T05:34:41.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="commit-message-格式">Commit Message 格式</h2>
+<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+&lt;BLANK LINE&gt;
+&lt;body&gt;
+&lt;BLANK LINE&gt;
+&lt;footer&gt;
+</code></pre>
+<p>参考 <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines">Angular</a> 规范</p>
+<p>通过 git commit 命令带出的 vim 界面填写的最终结果应该类似如上这个结构, 大致分为三个部分(使用空行分割)：</p>
+<ul>
+<li>标题行：必填, 描述主要修改类型和内容</li>
+<li>主题内容：描述为什么修改, 做了什么样的修改, 以及开发的思路等等</li>
+<li>页脚注释：放 Breaking Changes 或 Closed Issues</li>
+</ul>
+<p>分别由如下部分构成：</p>
+<ul>
+<li>type: commit 的类型</li>
+<li>feat: 新特性</li>
+<li>fix: 修改问题</li>
+<li>refactor: 代码重构</li>
+<li>docs: 文档修改</li>
+<li>style: 代码格式修改，注意不是 css 修改</li>
+<li>test: 测试用例修改</li>
+<li>chore: 其他修改，比如构建流程，依赖管理</li>
+<li>scope: commit 影响的范围，比如：route, component, utils, build...</li>
+<li>subject: commit 的概述，建议符合 50/72 formatting</li>
+<li>body: commit 具体修改内容，可以分为多行，建议符合 50/72 formatting</li>
+<li>footer: 一些备注，通常是 BREAKING CHANGE 或修复的 bug 的链接</li>
+</ul>
+<h2 id="git-commit-模板">Git Commit 模板</h2>
+<p>修改 ~/.gitconfig，添加：</p>
+<pre><code>[commit]
+template = ~/.gitmessage
+</code></pre>
+<p>新建 ~/.gitmessage 内容可以如下：</p>
+<pre><code># head: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+# - type: feat, fix, docs, style, refactor, test, chore
+# - scope: can be empty (eg. if the change is a global or difficult to assign to a single component)
+# - subject: start with verb (such as 'change'), 50-character line
+#
+# body: 72-character wrapped. This should answer:
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
+#
+# footer:
+# - Include a link to the ticket, if any.
+# - BREAKING CHANGE
+#
+</code></pre>
+<h2 id="commitizen替代你的-git-commit">Commitizen：替代你的 Git Commit</h2>
+<p><a href="https://github.com/commitizen/cz-cli">commitizen/cz-cli</a>，我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message</p>
+<p>除此之外，我们还需要为 commitizen 指定一个 Adapter 比如：<a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a> (一个符合 Angular 团队规范的 preset)。使得 commitizen 按照我们指定的规范帮助我们生成 commit message</p>
+<h3 id="全局安装推荐">全局安装（推荐）</h3>
+<pre><code class="language-bash">npm install -g commitizen cz-conventional-changelog
+echo '{ &quot;path&quot;: &quot;cz-conventional-changelog&quot; }' &gt; ~/.czrc
+</code></pre>
+<h3 id="项目级安装">项目级安装</h3>
+<blockquote>
+<p>如果不是 node 项目可以用 <code>npm init -y</code> 生成 <code>package.josn</code></p>
+</blockquote>
+<pre><code class="language-bash">npm install -D commitizen cz-conventional-changelog
+</code></pre>
+<p>package.json 中配置：</p>
+<pre><code class="language-json">&quot;script&quot;: {
+    ...,
+    &quot;commit&quot;: &quot;git-cz&quot;,
+},
+ &quot;config&quot;: {
+    &quot;commitizen&quot;: {
+      &quot;path&quot;: &quot;node_modules/cz-conventional-changelog&quot;
+    }
+  }
+</code></pre>
+<p>如果全局安装过 Commitizen，那么在对应的项目中执行 <code>git cz</code> 或 <code>npm run commit</code> 都可以</p>
+<h3 id="commitlint校验你的-message">Commitlint：校验你的 message</h3>
+<p><a href="https://github.com/marionebl/commitlint">commitlint</a> 可以帮助我们 lint commit messages, 如果我们提交的不符合指向的规范, 直接拒绝提交</p>
+<p>校验配置推荐 <a href="https://github.com/marionebl/commitlint/tree/master/@commitlint/config-conventional">@commitlint/config-conventional</a></p>
+<p>同时需要在项目目录下创建配置文件 .commitlintrc.js，写入：</p>
+<pre><code class="language-js">module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  rules: {},
+}
+</code></pre>
+<h3 id="standard-version自动生成-changelog">standard-version：自动生成 CHANGELOG</h3>
+<p>通过以上工具的帮助，我们的 commit message 应该是符合 Angular 团队那套，这样也便于我们借助 standard-version 这样的工具，自动生成 CHANGELOG，甚至是 语义化的版本号(Semantic Version)</p>
+<p>安装使用：</p>
+<pre><code class="language-bash">npm i -S standard-version
+</code></pre>
+<p>package.json 配置：</p>
+<pre><code class="language-json">&quot;scirpt&quot;: {
+    ...,
+    &quot;release&quot;: &quot;standard-version&quot;
+}
+</code></pre>
+<h2 id="最后">最后</h2>
+<p>遵守以上提交规范的同时，<strong>禁止</strong>使用诸如 <code>git commit -am</code> 方式提交 Commit Message</p>
 ]]></content>
     </entry>
 </feed>

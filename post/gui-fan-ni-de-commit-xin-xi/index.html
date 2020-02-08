@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>规范你的 commit 信息 | Untitled</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1581140513483">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://m01i0ng.js.org">
+        <img class="avatar" src="https://m01i0ng.js.org/images/avatar.png?v=1581140513483" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://m01i0ng.js.org">
+        <h1 class="site-title">Untitled</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">规范你的 commit 信息</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-02-08</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://m01i0ng.js.org/tag/9sjiteWCc">
+                    git
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://m01i0ng.js.org/tag/Zn1s3P9aQD">
+                    commit
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="commit-message-格式">Commit Message 格式</h2>
+<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+&lt;BLANK LINE&gt;
+&lt;body&gt;
+&lt;BLANK LINE&gt;
+&lt;footer&gt;
+</code></pre>
+<p>参考 <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines">Angular</a> 规范</p>
+<p>通过 git commit 命令带出的 vim 界面填写的最终结果应该类似如上这个结构, 大致分为三个部分(使用空行分割)：</p>
+<ul>
+<li>标题行：必填, 描述主要修改类型和内容</li>
+<li>主题内容：描述为什么修改, 做了什么样的修改, 以及开发的思路等等</li>
+<li>页脚注释：放 Breaking Changes 或 Closed Issues</li>
+</ul>
+<p>分别由如下部分构成：</p>
+<ul>
+<li>type: commit 的类型</li>
+<li>feat: 新特性</li>
+<li>fix: 修改问题</li>
+<li>refactor: 代码重构</li>
+<li>docs: 文档修改</li>
+<li>style: 代码格式修改，注意不是 css 修改</li>
+<li>test: 测试用例修改</li>
+<li>chore: 其他修改，比如构建流程，依赖管理</li>
+<li>scope: commit 影响的范围，比如：route, component, utils, build...</li>
+<li>subject: commit 的概述，建议符合 50/72 formatting</li>
+<li>body: commit 具体修改内容，可以分为多行，建议符合 50/72 formatting</li>
+<li>footer: 一些备注，通常是 BREAKING CHANGE 或修复的 bug 的链接</li>
+</ul>
+<h2 id="git-commit-模板">Git Commit 模板</h2>
+<p>修改 ~/.gitconfig，添加：</p>
+<pre><code>[commit]
+template = ~/.gitmessage
+</code></pre>
+<p>新建 ~/.gitmessage 内容可以如下：</p>
+<pre><code># head: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+# - type: feat, fix, docs, style, refactor, test, chore
+# - scope: can be empty (eg. if the change is a global or difficult to assign to a single component)
+# - subject: start with verb (such as 'change'), 50-character line
+#
+# body: 72-character wrapped. This should answer:
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
+#
+# footer:
+# - Include a link to the ticket, if any.
+# - BREAKING CHANGE
+#
+</code></pre>
+<h2 id="commitizen替代你的-git-commit">Commitizen：替代你的 Git Commit</h2>
+<p><a href="https://github.com/commitizen/cz-cli">commitizen/cz-cli</a>，我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message</p>
+<p>除此之外，我们还需要为 commitizen 指定一个 Adapter 比如：<a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a> (一个符合 Angular 团队规范的 preset)。使得 commitizen 按照我们指定的规范帮助我们生成 commit message</p>
+<h3 id="全局安装推荐">全局安装（推荐）</h3>
+<pre><code class="language-bash">npm install -g commitizen cz-conventional-changelog
+echo '{ &quot;path&quot;: &quot;cz-conventional-changelog&quot; }' &gt; ~/.czrc
+</code></pre>
+<h3 id="项目级安装">项目级安装</h3>
+<blockquote>
+<p>如果不是 node 项目可以用 <code>npm init -y</code> 生成 <code>package.josn</code></p>
+</blockquote>
+<pre><code class="language-bash">npm install -D commitizen cz-conventional-changelog
+</code></pre>
+<p>package.json 中配置：</p>
+<pre><code class="language-json">&quot;script&quot;: {
+    ...,
+    &quot;commit&quot;: &quot;git-cz&quot;,
+},
+ &quot;config&quot;: {
+    &quot;commitizen&quot;: {
+      &quot;path&quot;: &quot;node_modules/cz-conventional-changelog&quot;
+    }
+  }
+</code></pre>
+<p>如果全局安装过 Commitizen，那么在对应的项目中执行 <code>git cz</code> 或 <code>npm run commit</code> 都可以</p>
+<h3 id="commitlint校验你的-message">Commitlint：校验你的 message</h3>
+<p><a href="https://github.com/marionebl/commitlint">commitlint</a> 可以帮助我们 lint commit messages, 如果我们提交的不符合指向的规范, 直接拒绝提交</p>
+<p>校验配置推荐 <a href="https://github.com/marionebl/commitlint/tree/master/@commitlint/config-conventional">@commitlint/config-conventional</a></p>
+<p>同时需要在项目目录下创建配置文件 .commitlintrc.js，写入：</p>
+<pre><code class="language-js">module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  rules: {},
+}
+</code></pre>
+<h3 id="standard-version自动生成-changelog">standard-version：自动生成 CHANGELOG</h3>
+<p>通过以上工具的帮助，我们的 commit message 应该是符合 Angular 团队那套，这样也便于我们借助 standard-version 这样的工具，自动生成 CHANGELOG，甚至是 语义化的版本号(Semantic Version)</p>
+<p>安装使用：</p>
+<pre><code class="language-bash">npm i -S standard-version
+</code></pre>
+<p>package.json 配置：</p>
+<pre><code class="language-json">&quot;scirpt&quot;: {
+    ...,
+    &quot;release&quot;: &quot;standard-version&quot;
+}
+</code></pre>
+<h2 id="最后">最后</h2>
+<p>遵守以上提交规范的同时，<strong>禁止</strong>使用诸如 <code>git commit -am</code> 方式提交 Commit Message</p>
+
+          </div>
+        </div>
+
+        
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://m01i0ng.js.org/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '4fc683c05fc3ba5bcf66',
+        clientSecret: 'eaf39a9547e39a17b74ee130e79385f8117827ae',
+        repo: 'm01i0ng.github.io',
+        owner: 'm01i0ng',
+        admin: ['m01i0ng'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
