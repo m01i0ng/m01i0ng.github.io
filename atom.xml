@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-02-10T02:52:11.834Z</updated>
+    <updated>2020-02-17T07:22:05.463Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, Untitled</rights>
     <entry>
         <title type="html"><![CDATA[Mac 软件]]></title>
-        <id>https://m01i0ng.js.org/post/mac-ruan-jian</id>
-        <link href="https://m01i0ng.js.org/post/mac-ruan-jian">
+        <id>https://m01i0ng.js.org/post/mac-ruan-jian/</id>
+        <link href="https://m01i0ng.js.org/post/mac-ruan-jian/">
         </link>
         <updated>2020-02-08T05:41:43.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统">系统</h2>
@@ -71,8 +71,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Mac 开发环境搭建]]></title>
-        <id>https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian</id>
-        <link href="https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian">
+        <id>https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian/</id>
+        <link href="https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian/">
         </link>
         <updated>2020-02-08T05:40:55.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统配置优化">系统配置优化</h2>
@@ -280,8 +280,8 @@ gem sources -l
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux 归纳]]></title>
-        <id>https://m01i0ng.js.org/post/linux-gui-na</id>
-        <link href="https://m01i0ng.js.org/post/linux-gui-na">
+        <id>https://m01i0ng.js.org/post/linux-gui-na/</id>
+        <link href="https://m01i0ng.js.org/post/linux-gui-na/">
         </link>
         <updated>2020-02-08T05:40:16.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统优化">系统优化</h2>
@@ -387,8 +387,8 @@ lvm&gt;quit 　退出
     </entry>
     <entry>
         <title type="html"><![CDATA[使用 Kubeadm 快速创建 K8S 集群]]></title>
-        <id>https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun</id>
-        <link href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun">
+        <id>https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/</id>
+        <link href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">
         </link>
         <updated>2020-02-08T05:39:13.000Z</updated>
         <content type="html"><![CDATA[<h2 id="环境架构">环境架构</h2>
@@ -575,8 +575,8 @@ kubectl delete deploy nginx
     </entry>
     <entry>
         <title type="html"><![CDATA[Docker 镜像的分阶段构建]]></title>
-        <id>https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian</id>
-        <link href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian">
+        <id>https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/</id>
+        <link href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/">
         </link>
         <updated>2020-02-08T05:37:14.000Z</updated>
         <content type="html"><![CDATA[<p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
@@ -618,8 +618,8 @@ EXPOSE 80
     </entry>
     <entry>
         <title type="html"><![CDATA[规范你的 commit 信息]]></title>
-        <id>https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi</id>
-        <link href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi">
+        <id>https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/</id>
+        <link href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/">
         </link>
         <updated>2020-02-08T05:34:41.000Z</updated>
         <content type="html"><![CDATA[<h2 id="commit-message-格式">Commit Message 格式</h2>
