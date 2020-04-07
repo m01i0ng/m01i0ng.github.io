@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Spring Boot 中使用 RedisTemplate 进行 scan 操作 | Untitled</title>
-<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1585888355870">
+<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1586266843289">
 <link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -477,13 +477,13 @@ window.addEventListener('load', function() {
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>171<span class="pc-show">字数</span></span>
+      <span>143<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>让同事想打死的你 100 种方法，其中一个是在 redis 中使用 <code>keys *</code>，此操作会获取所有匹配的键，但同时也会锁住整个 redis 造成雪崩，更好的方法是使用 <code>scan</code> 命令，有关介绍 <a href="http://redis.cn/commands/scan.html">看这</a> 不做过多介绍，在 SB 中如何使用？</p>
+                <p>Redis 中使用 <code>keys *</code> 会获取所有匹配的键，但同时也会锁住整个 redis 造成雪崩，更好的方法是使用 <code>scan</code> 命令，有关介绍 <a href="http://redis.cn/commands/scan.html">看这</a> 不做过多介绍</p>
 <h2 id="引入依赖">引入依赖</h2>
 <pre><code class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;

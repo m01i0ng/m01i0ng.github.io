@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-04-03T04:32:41.207Z</updated>
+    <updated>2020-04-07T13:40:46.302Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">
         </link>
         <updated>2020-04-03T04:22:51.000Z</updated>
-        <content type="html"><![CDATA[<p>让同事想打死的你 100 种方法，其中一个是在 redis 中使用 <code>keys *</code>，此操作会获取所有匹配的键，但同时也会锁住整个 redis 造成雪崩，更好的方法是使用 <code>scan</code> 命令，有关介绍 <a href="http://redis.cn/commands/scan.html">看这</a> 不做过多介绍，在 SB 中如何使用？</p>
+        <content type="html"><![CDATA[<p>Redis 中使用 <code>keys *</code> 会获取所有匹配的键，但同时也会锁住整个 redis 造成雪崩，更好的方法是使用 <code>scan</code> 命令，有关介绍 <a href="http://redis.cn/commands/scan.html">看这</a> 不做过多介绍</p>
 <h2 id="引入依赖">引入依赖</h2>
 <pre><code class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
