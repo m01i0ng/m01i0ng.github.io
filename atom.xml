@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-04-22T06:24:42.983Z</updated>
+    <updated>2020-04-22T07:45:17.659Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -52,6 +52,26 @@ export const dva = {
   background: rgb(18, 108, 170);
   -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
+...
+</code></pre>
+<h2 id="antd-开启中文">antd 开启中文</h2>
+<p>antd 默认文案是英文的，中文要手动开启</p>
+<pre><code class="language-js">// .umirc.ts
+...
+  locale: {
+    default: 'zh-CN',
+    antd: true,
+    title: false,
+    baseNavigator: true,
+    baseSeparator: '-',
+  },
+...
+
+// src/layouts/index.js
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/es/locale/zh_CN'
+...
+&lt;ConfigProvider locale={zhCN}&gt;{props.children}&lt;/ConfigProvider&gt;
 ...
 </code></pre>
 ]]></content>
