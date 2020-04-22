@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-04-07T13:40:46.302Z</updated>
+    <updated>2020-04-22T06:24:42.983Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,52 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[Umi.js 问题总结]]></title>
+        <id>https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/</id>
+        <link href="https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/">
+        </link>
+        <updated>2020-04-22T06:20:17.000Z</updated>
+        <content type="html"><![CDATA[<p>使用版本 3.1.1</p>
+<h2 id="dva-loading-组件错误处理">dva loading 组件错误处理</h2>
+<pre><code class="language-js">// src/app.js
+import { notification } from 'antd'
+...
+export const dva = {
+  config: {
+    onError(err) {
+      err.preventDefault()
+      notification.error({
+        message: err.message,
+      })
+    },
+  },
+}
+...
+</code></pre>
+<h2 id="修改全局滚动条样式">修改全局滚动条样式</h2>
+<pre><code class="language-css">// src/global.css
+...
+/* 滚动槽 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: rgb(18, 52, 83);
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgb(18, 108, 170);
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+...
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Spring Boot 中使用 RedisTemplate 进行 scan 操作]]></title>
         <id>https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/</id>

@@ -6,7 +6,7 @@
 <meta name="keywords" content="m01i0ng 个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Docker 镜像的分阶段构建 | Untitled</title>
+<title>Umi.js 问题总结 | Untitled</title>
 <link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1587536680516">
 <link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
 
@@ -25,8 +25,8 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
 
-    <meta name="description" content="Docker 镜像的分阶段构建" />
-    <meta name="keywords" content="Docker" />
+    <meta name="description" content="Umi.js 问题总结" />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -131,9 +131,17 @@
 <div class="sidebar">
     <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
       
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
       <div class="sidebar-body gemini" id="sidebar_body">
         
-          
+          <div class="post-side-meta" id="post_side_meta">
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://m01i0ng.js.org/images/avatar.png"/>
@@ -188,6 +196,182 @@
 
 
 </div>
+          </div>
+          <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+            <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#dva-loading-%E7%BB%84%E4%BB%B6%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">dva loading 组件错误处理</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E5%85%A8%E5%B1%80%E6%BB%9A%E5%8A%A8%E6%9D%A1%E6%A0%B7%E5%BC%8F">修改全局滚动条样式</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    lList.push(elem);
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+addTocNumber(tocContent, '');
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+          </div>
         
       </div>
     </div>
@@ -273,8 +457,8 @@
               <div class="article-box">
     <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/">
-      Docker 镜像的分阶段构建
+    <a class="post-title-link" href="https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/">
+      Umi.js 问题总结
     </a>
   </h1>
   <div class="post-meta">
@@ -282,71 +466,61 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-02-08</span>
+      <span>2020-04-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://m01i0ng.js.org/tag/sPUrg8x7B/">
-              <span>Docker</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
+      <span>1分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>321<span class="pc-show">字数</span></span>
+      <span>109<span class="pc-show">字数</span></span>
     </span>
   </div>
 </header>
 </div>
               <div class="post-body next-md-body" id="post_body">
-                <p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
-一些语言项目例如前端、Go 等，其构建阶段需要一堆依赖如 <code>node_modules</code>、<code>vendor</code> 等，但运行阶段只需要 build 出来的静态页面或二进制文件，所以要将构建和运行分开为两个阶段，最终镜像中只包含 build 的结果</p>
-<p>以前端项目举例，目录结构如下：</p>
-<pre><code>├── .docker
-├── .dockerignore
-├── Dockerfile
-├── README.md
-├── node_modules
-├── package.json
-├── public
-├── src
-└── yarn.lock
+                <p>使用版本 3.1.1</p>
+<h2 id="dva-loading-组件错误处理">dva loading 组件错误处理</h2>
+<pre><code class="language-js">// src/app.js
+import { notification } from 'antd'
+...
+export const dva = {
+  config: {
+    onError(err) {
+      err.preventDefault()
+      notification.error({
+        message: err.message,
+      })
+    },
+  },
+}
+...
 </code></pre>
-<p>.docker 文件夹中存放了 nginx 的配置<br>
-.dockerignore 文件写不希望添加到镜像中的文件，比如 <code>node_modules</code><br>
-Dockerfile 是主角，内容如下：</p>
-<pre><code class="language-Dockerfile"># 第一阶段，拉取 node 基础镜像并安装依赖，执行构建
-FROM node:11-alpine as builder
-
-WORKDIR /tmp
-COPY . .
-RUN npm config set registry https://registry.npm.taobao.org \
-    &amp;&amp; npm i -g yarn
-RUN yarn &amp;&amp; yarn build
-
-# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际 release 的镜像中，会丢弃第一阶段中其他的文件
-FROM nginx:alpine
-
-COPY .docker/conf/default.conf /etc/nginx/conf.d/
-COPY --from=builder /tmp/build /usr/share/nginx/html
-
-EXPOSE 80
+<h2 id="修改全局滚动条样式">修改全局滚动条样式</h2>
+<pre><code class="language-css">// src/global.css
+...
+/* 滚动槽 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: rgb(18, 52, 83);
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgb(18, 108, 170);
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+...
 </code></pre>
-<p>执行 <code>docker build -t m01i0ng/demo .</code> 就会生成镜像</p>
-<p>跟最终 release 镜像无关的文件依赖等等都要放在构建阶段</p>
 
               </div>
               <div class="post-footer">
@@ -357,7 +531,7 @@ EXPOSE 80
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/" title="Docker 镜像的分阶段构建">Docker 镜像的分阶段构建</a>
+      <a href="https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/" title="Umi.js 问题总结">Umi.js 问题总结</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -366,21 +540,15 @@ EXPOSE 80
   </ul>
   <div class="tags">
     
-      <a href="https://m01i0ng.js.org/tag/sPUrg8x7B/"># Docker</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="使用 Kubeadm 快速创建 K8S 集群" href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">使用 Kubeadm 快速创建 K8S 集群</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="使用 Kubeadm 快速创建 K8S 集群" href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="规范你的 commit 信息" href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/">规范你的 commit 信息</a>
-        <a class="nav-mobile-next" title="规范你的 commit 信息" href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/">下一篇</a>
+        <a class="nav-pc-next" title="Spring Boot 中使用 RedisTemplate 进行 scan 操作" href="https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">Spring Boot 中使用 RedisTemplate 进行 scan 操作</a>
+        <a class="nav-mobile-next" title="Spring Boot 中使用 RedisTemplate 进行 scan 操作" href="https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
