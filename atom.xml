@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-04-22T07:45:17.659Z</updated>
+    <updated>2020-05-22T06:18:50.984Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[Flutter 中获取屏幕可用高度]]></title>
+        <id>https://m01i0ng.js.org/post/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/</id>
+        <link href="https://m01i0ng.js.org/post/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/">
+        </link>
+        <updated>2020-05-22T06:05:52.000Z</updated>
+        <content type="html"><![CDATA[<p>首先不管是 Android 还是 iOS 设备，都要考虑各种刘海、水滴屏等等，所以最外层容器要用 <code>SafeArea</code> 包裹，其次要考虑状态栏高度</p>
+<figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/NIH34c.png" alt="NIH34c" loading="lazy"></figure>
+<p>如果应用有顶栏，也要考虑顶栏高度</p>
+<figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Uip3b3.png" alt="Uip3b3" loading="lazy"></figure>
+<p>所以最终实际内容可用区域高度为 <code>屏幕高度 - 状态栏高度 - 顶栏高度</code>，即为内容区高度，当然是在有 <code>SafeArea</code> 的前提下，代码如下：</p>
+<pre><code class="language-dart">final mediaQuery = MediaQuery.of(context);
+final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Ju4l5i.png" alt="Ju4l5i" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Umi.js 问题总结]]></title>
         <id>https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/</id>
