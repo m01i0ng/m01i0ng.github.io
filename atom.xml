@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-05-22T06:19:09.713Z</updated>
+    <updated>2020-05-22T06:20:42.729Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -22,7 +22,7 @@
 <figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Uip3b3.png" alt="Uip3b3" loading="lazy"></figure>
 <p>所以最终实际内容可用区域高度为 <code>屏幕高度 - 状态栏高度 - 顶栏高度</code>，即为内容区高度，当然是在有 <code>SafeArea</code> 的前提下，代码如下：</p>
 <pre><code class="language-dart">final mediaQuery = MediaQuery.of(context);
-final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top
+final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top;
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Ju4l5i.png" alt="Ju4l5i" loading="lazy"></figure>
 ]]></content>

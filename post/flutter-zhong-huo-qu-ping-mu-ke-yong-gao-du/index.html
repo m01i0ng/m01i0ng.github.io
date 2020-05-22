@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Flutter 中获取屏幕内容区可用高度 | Untitled</title>
-<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1590128345589">
+<link rel="shortcut icon" href="https://m01i0ng.js.org/favicon.ico?v=1590128439371">
 <link rel="stylesheet" href="https://m01i0ng.js.org/styles/main.css">
 
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -305,7 +305,7 @@
 <figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Uip3b3.png" alt="Uip3b3" loading="lazy"></figure>
 <p>所以最终实际内容可用区域高度为 <code>屏幕高度 - 状态栏高度 - 顶栏高度</code>，即为内容区高度，当然是在有 <code>SafeArea</code> 的前提下，代码如下：</p>
 <pre><code class="language-dart">final mediaQuery = MediaQuery.of(context);
-final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top
+final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top;
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/Ju4l5i.png" alt="Ju4l5i" loading="lazy"></figure>
 
