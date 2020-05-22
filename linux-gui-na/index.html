@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+<title>Linux 归纳 - Untitled</title>
+<meta name="description" content="温故而知新">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link type='text/css' rel='stylesheet' href='https://m01i0ng.js.org/styles/main.css' media='screen' />
+<link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css">
+<link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script type="text/javascript" src='https://m01i0ng.js.org/media/scripts/jquery.js'></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+</head>
+
+<body>
+  <div class="layout theme-dark">
+    <div class="layout-header">
+
+	<div class="layout-header-main">
+		<div class="container">
+			<div class="row justify-content-lg-center">
+				<div class="col-12 col-lg-9">
+
+					<div class="navbar">
+
+						<div class="logo">
+							<a href="https://m01i0ng.js.org">
+								<img class="logo"
+									src="https://m01i0ng.js.org/media/images/site_avatar.png?v=1590130567436"
+									alt="">
+							</a>
+						</div>
+
+						<div class="menu d-md-inline-block d-none">
+							<ul class="layout-navigation-list">
+								
+								<li class="layout-navigation-item"><a title="首页"
+										href="/">首页</a>
+								</li>
+								
+								<li class="layout-navigation-item"><a title="归档"
+										href="/archives">归档</a>
+								</li>
+								
+								<li class="layout-navigation-item"><a title="标签"
+										href="/tags">标签</a>
+								</li>
+								
+								<li class="layout-navigation-item"><a title="关于"
+										href="/post/about">关于</a>
+								</li>
+								
+							</ul>
+						</div>
+
+						<div class="item d-md-inline-block d-none">
+							<div class="search-icon">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</div>
+						</div>
+
+
+
+						<div class="d-md-inline-block d-none">
+							<div class="search-lightbox">
+								<div class="search-body">
+
+									<form id="gridea-search-form" data-update="1590130567436" action="/search/" class="search-form">
+										<input type="text" name="q" id="s" value="" class="search-field" placeholder="请输入搜索关键词" aria-label="请输入搜索关键词" required="">
+										<button type="submit" class="submit" aria-label="Submit">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
+									</form>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="nav d-md-none d-inline-block">
+							<div class="trigger">
+								<i class="fa fa-bars layout-btn-toggle" aria-hidden="true"></i>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+
+</div>
+    <div class="layout-collapse d-md-none">
+	<div class="layout-collapse-main">
+		<ul class="layout-collapse-list">
+			
+			<li class="layout-collapse-item"><a title="首页" href="/">首页</a></li>
+			
+			<li class="layout-collapse-item"><a title="归档" href="/archives">归档</a></li>
+			
+			<li class="layout-collapse-item"><a title="标签" href="/tags">标签</a></li>
+			
+			<li class="layout-collapse-item"><a title="关于" href="/post/about">关于</a></li>
+			
+
+		</ul>
+	</div>
+</div>
+
+    <div class="layout-content">
+      <div class="layout-content-main">
+        <div class="container">
+          <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+              <div class="layout-post">
+                <div class="layout-post-body">
+                  <div class="row">
+
+                    <div class="col-12 col-lg-10">
+                      <div class="layout-post-main m-right m-md-right">
+                        <div class="layout-post-header">
+                          <h1 class="layout-post-title">Linux 归纳</h1>
+                          <div class="layout-post-meta">
+                            <div class="item">
+                               <a href="https://m01i0ng.js.org/tag/K4eHMIOla/" class="post--keyword"
+                                data-title="Linux" data-type="post_tag" data-term-id="39">Linux</a>
+                              
+                            </div>
+                            <div class="item">
+                              <span>2020-02-08</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="layout-post-content">
+                          <div class="layout-post-item">
+                            
+                            <h2 id="系统优化">系统优化</h2>
+<h3 id="ct-7-磁盘扩容">CT 7 磁盘扩容</h3>
+<blockquote>
+<p>场景：VM 虚拟机磁盘分配不足后期添加并扩容至主分区</p>
+</blockquote>
+<ul>
+<li>查看系统挂载信息</li>
+</ul>
+<p><code>df -h</code></p>
+<ul>
+<li>
+<p>在 VM 设置中扩展磁盘</p>
+</li>
+<li>
+<p>对新增加的硬盘进行分区、格式化</p>
+</li>
+</ul>
+<pre><code class="language-bash"># 我们增加了空间的硬盘是 /dev/sda
+
+# 分区：
+[root@localhost]# fdisk /dev/sda　　　　
+p　　　　　　　查看已分区数量（我看到有两个 /dev/sda1 /dev/sda2）
+n　　　　　　　新增加一个分区
+p　　　　　　　分区类型我们选择为主分区
+　　　　　　     分区号输入3（因为1,2已经用过了,sda1是分区1,sda2是分区2,sda3分区3）
+回车　　　　　  默认（起始扇区）
+回车　　　　　  默认（结束扇区）
+t　　　　　　　 修改分区类型
+　　　　　　     选分区3
+8e　　　　　 　修改为LVM（8e就是LVM）
+w　　　　　  　写分区表
+q　　　　　  　完成，退出fdisk命令
+
+# 使用partprobe 命令 或者重启机器 
+
+# 格式化分区3命令:
+
+mkfs.ext3 /dev/sda3
+</code></pre>
+<ul>
+<li>添加新 LVM 至已有 LVM 组，实现扩容</li>
+</ul>
+<pre><code class="language-bash">lvm　　　　　　　　　　　　           进入lvm管理
+
+lvm&gt;pvcreate /dev/sda3　　           这是初始化刚才的分区3
+
+lvm&gt;vgextend centos /dev/sda3     将初始化过的分区加入到虚拟卷组centos (卷和卷组的命令可以通过 vgdisplay )
+
+lvm&gt;vgdisplay -v 或 者vgdisplay 查看 free PE /Site
+
+lvm&gt;lvextend -l+6143 /dev/mapper/centos-root　　扩展已有卷的容量（6143 是通过vgdisplay查看free PE /Site的大小）
+
+lvm&gt;pvdisplay 查看卷容量，这时你会看到一个很大的卷了
+
+lvm&gt;quit 　退出
+</code></pre>
+<p>接着输入以下命令：</p>
+<p><code>xfs_growfs /dev/mapper/centos-root</code></p>
+<p>重复执行 <code>df -h</code> 验证</p>
+<h3 id="添加-swap-空间">添加 Swap 空间</h3>
+<ul>
+<li>制作 Swapfile 文件</li>
+</ul>
+<p>Linux：<code>fallocate -l 4G /swapfile &amp;&amp; chmod 600 /swapfile</code></p>
+<p>CentOS：<code>dd if=/dev/zero of=/swapfile count=4096 bs=1MiB &amp;&amp; chmod 600 /swapfile</code></p>
+<ul>
+<li>格式化交换空间</li>
+</ul>
+<p><code>mkswap /swapfile</code></p>
+<ul>
+<li>开启交换空间</li>
+</ul>
+<p><code>swapon /swapfile</code></p>
+<ul>
+<li>开机自动挂载</li>
+</ul>
+<p><code>vim /etc/fstab</code> 把原有交换空间文件替换为新的</p>
+<h3 id="设置时区">设置时区</h3>
+<ul>
+<li>查看可用时区</li>
+</ul>
+<p><code>timedatectl list-timezones</code></p>
+<ul>
+<li>设置时区</li>
+</ul>
+<p><code>timedatectl set-timezone Asia/Shanghai</code></p>
+<ul>
+<li>更新</li>
+</ul>
+<p><code>timedatectl</code></p>
+<h3 id="设置-ntp">设置 NTP</h3>
+<ul>
+<li>安装 NTP</li>
+</ul>
+<p><code>yum install -y ntp</code></p>
+<ul>
+<li>开启</li>
+</ul>
+<p><code>systemctl start ntpd &amp;&amp; systemctl enable ntpd</code></p>
+
+                          </div>
+                        </div>
+                        <div class="layout-post-social">
+                          <div class="item reader">
+                            <div id="/post/linux-gui-na/" class="leancloud-visitors view"
+                              data-flag-title="Linux 归纳">
+                              <span class="post-meta-item-text">阅读 </span>
+                              <span class="leancloud-visitors-count"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="layout-post-navigation">
+                          <div class="navigation-list">
+                            
+                            <div class="post-card row">
+                              
+                              <div class="card-content col-12">
+                                <div class="card-body">
+                                  <div class="header">
+                                    <a href="https://m01i0ng.js.org/mac-kai-fa-huan-jing-da-jian/" class="title">
+                                      <h4>Mac 开发环境搭建</h4>
+                                    </a>
+                                  </div>
+                                  <div class="inner">
+                                    <div class="abstract">
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card-footer">
+                                  <div class="item"><span>上一篇</span></div>
+                                  <div class="item">2020-02-08</div>
+                                </div>
+                              </div>
+                              
+                            </div>
+
+                            <div class="post-card row">
+                              
+                              <div class="card-content col-12">
+                                <div class="card-body">
+                                  <div class="header">
+                                    <a href="https://m01i0ng.js.org/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/" class="title">
+                                      <h4>使用 Kubeadm 快速创建 K8S 集群</h4>
+                                    </a>
+                                  </div>
+                                  <div class="inner">
+                                    <div class="abstract">
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card-footer">
+                                  <div class="item"><span>下一篇</span></div>
+                                  <div class="item">2020-02-08</div>
+                                </div>
+                              </div>
+                              
+                            </div>
+
+                            
+                          </div>
+                        </div>
+
+                        <div class="layout-comments"></div>
+                        
+                        <script type="text/javascript" src='https://m01i0ng.js.org/media/scripts/zan.js'></script>
+<script type="text/javascript" src='https://m01i0ng.js.org/media/scripts/av-min.js'></script>
+<script type="text/javascript" src='https://m01i0ng.js.org/media/scripts/Valine.min.js'></script>
+
+<script>
+  var valine = new Valine();
+  valine.init({
+    el: '.layout-comments',
+    appId: 'EYfm3fMEYq4kxvu0c4GsrUsP-gzGzoHsz',
+    appKey: 'ToFsSKzpmlf16qEhNPO5XMJy',
+    notify: false,
+    verify: false,
+    visitor: true,
+    avatar: 'mp',
+    placeholder: '加入讨论...'
+  })
+</script>
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-lg-2 d-none d-lg-block">
+                      <div class="layout-post-sidebar">
+                        <div class="layout-sidebar-item">
+                          <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96">系统优化</a>
+<ul>
+<li><a href="#ct-7-%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9">CT 7 磁盘扩容</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0-swap-%E7%A9%BA%E9%97%B4">添加 Swap 空间</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA">设置时区</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE-ntp">设置 NTP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout-totop d-none"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+
+    	<div class="layout-footer">
+
+		<div class="container">
+			<div class="row justify-content-lg-center">
+				<div class="col-12 col-lg-9">
+					<div class="footer">
+						<div class="row">
+							<div class="col-12 col-md-9">
+								<div class="footer-copy">
+									
+									Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+									<div class="footer-icp d-none d-sm-inline-block">
+										<span class="px-2">⋅</span>
+										
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-3 d-none d-md-block">
+								<div class="footer-links">
+									
+									
+									
+									
+									<span class="footer-links-item">
+										<a href="https://github.com/m01i0ng" target="_blank">
+											<i class="fa fa-github" aria-hidden="true"></i>
+										</a>
+									</span>
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src='https://m01i0ng.js.org/media/scripts/main.js'></script>
+	
+
+  </div>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-05-22T06:21:14.653Z</updated>
+    <updated>2020-05-22T06:56:14.935Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, Untitled</rights>
     <entry>
         <title type="html"><![CDATA[Flutter 中获取屏幕内容区可用高度]]></title>
-        <id>https://m01i0ng.js.org/post/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/</id>
-        <link href="https://m01i0ng.js.org/post/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/">
+        <id>https://m01i0ng.js.org/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/</id>
+        <link href="https://m01i0ng.js.org/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/">
         </link>
         <updated>2020-05-22T06:05:52.000Z</updated>
         <content type="html"><![CDATA[<p>首先不管是 Android 还是 iOS 设备，都要考虑各种刘海、水滴屏等等，所以最外层容器要用 <code>SafeArea</code> 包裹，其次要考虑状态栏高度：</p>
@@ -29,8 +29,8 @@ final availableHeight = mediaQuery.size.height - appBar.preferredSize.height - m
     </entry>
     <entry>
         <title type="html"><![CDATA[Umi.js 问题总结]]></title>
-        <id>https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/</id>
-        <link href="https://m01i0ng.js.org/post/umijs-wen-ti-zong-jie/">
+        <id>https://m01i0ng.js.org/umijs-wen-ti-zong-jie/</id>
+        <link href="https://m01i0ng.js.org/umijs-wen-ti-zong-jie/">
         </link>
         <updated>2020-04-22T06:20:17.000Z</updated>
         <content type="html"><![CDATA[<p>使用版本 3.1.1</p>
@@ -95,8 +95,8 @@ import zhCN from 'antd/es/locale/zh_CN'
     </entry>
     <entry>
         <title type="html"><![CDATA[Spring Boot 中使用 RedisTemplate 进行 scan 操作]]></title>
-        <id>https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/</id>
-        <link href="https://m01i0ng.js.org/post/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">
+        <id>https://m01i0ng.js.org/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/</id>
+        <link href="https://m01i0ng.js.org/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">
         </link>
         <updated>2020-04-03T04:22:51.000Z</updated>
         <content type="html"><![CDATA[<p>Redis 中使用 <code>keys *</code> 会获取所有匹配的键，但同时也会锁住整个 redis 造成雪崩，更好的方法是使用 <code>scan</code> 命令，有关介绍 <a href="http://redis.cn/commands/scan.html">看这</a> 不做过多介绍</p>
@@ -130,8 +130,8 @@ private Set&lt;String&gt; scan(String pattern) {
     </entry>
     <entry>
         <title type="html"><![CDATA[Mac 软件]]></title>
-        <id>https://m01i0ng.js.org/post/mac-ruan-jian/</id>
-        <link href="https://m01i0ng.js.org/post/mac-ruan-jian/">
+        <id>https://m01i0ng.js.org/mac-ruan-jian/</id>
+        <link href="https://m01i0ng.js.org/mac-ruan-jian/">
         </link>
         <updated>2020-02-08T05:41:43.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统">系统</h2>
@@ -189,8 +189,8 @@ private Set&lt;String&gt; scan(String pattern) {
     </entry>
     <entry>
         <title type="html"><![CDATA[Mac 开发环境搭建]]></title>
-        <id>https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian/</id>
-        <link href="https://m01i0ng.js.org/post/mac-kai-fa-huan-jing-da-jian/">
+        <id>https://m01i0ng.js.org/mac-kai-fa-huan-jing-da-jian/</id>
+        <link href="https://m01i0ng.js.org/mac-kai-fa-huan-jing-da-jian/">
         </link>
         <updated>2020-02-08T05:40:55.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统配置优化">系统配置优化</h2>
@@ -398,8 +398,8 @@ gem sources -l
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux 归纳]]></title>
-        <id>https://m01i0ng.js.org/post/linux-gui-na/</id>
-        <link href="https://m01i0ng.js.org/post/linux-gui-na/">
+        <id>https://m01i0ng.js.org/linux-gui-na/</id>
+        <link href="https://m01i0ng.js.org/linux-gui-na/">
         </link>
         <updated>2020-02-08T05:40:16.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统优化">系统优化</h2>
@@ -505,8 +505,8 @@ lvm&gt;quit 　退出
     </entry>
     <entry>
         <title type="html"><![CDATA[使用 Kubeadm 快速创建 K8S 集群]]></title>
-        <id>https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/</id>
-        <link href="https://m01i0ng.js.org/post/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">
+        <id>https://m01i0ng.js.org/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/</id>
+        <link href="https://m01i0ng.js.org/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">
         </link>
         <updated>2020-02-08T05:39:13.000Z</updated>
         <content type="html"><![CDATA[<h2 id="环境架构">环境架构</h2>
@@ -693,8 +693,8 @@ kubectl delete deploy nginx
     </entry>
     <entry>
         <title type="html"><![CDATA[Docker 镜像的分阶段构建]]></title>
-        <id>https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/</id>
-        <link href="https://m01i0ng.js.org/post/docker-jing-xiang-de-fen-jie-duan-gou-jian/">
+        <id>https://m01i0ng.js.org/docker-jing-xiang-de-fen-jie-duan-gou-jian/</id>
+        <link href="https://m01i0ng.js.org/docker-jing-xiang-de-fen-jie-duan-gou-jian/">
         </link>
         <updated>2020-02-08T05:37:14.000Z</updated>
         <content type="html"><![CDATA[<p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
@@ -736,8 +736,8 @@ EXPOSE 80
     </entry>
     <entry>
         <title type="html"><![CDATA[规范你的 commit 信息]]></title>
-        <id>https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/</id>
-        <link href="https://m01i0ng.js.org/post/gui-fan-ni-de-commit-xin-xi/">
+        <id>https://m01i0ng.js.org/gui-fan-ni-de-commit-xin-xi/</id>
+        <link href="https://m01i0ng.js.org/gui-fan-ni-de-commit-xin-xi/">
         </link>
         <updated>2020-02-08T05:34:41.000Z</updated>
         <content type="html"><![CDATA[<h2 id="commit-message-格式">Commit Message 格式</h2>
