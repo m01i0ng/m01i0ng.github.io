@@ -79,6 +79,7 @@
 
 .sidebar {
   width: 240px;
+  position: relative;
 }
 
 .header ul {
@@ -104,6 +105,7 @@
   border-radius: initial;
   padding: 20px 10px;
   box-sizing: border-box;
+  width: 240px;
 }
 
 .site-author-image {
@@ -150,7 +152,6 @@
   top: 0;
   padding: 0;
   width: 240px;
-  border-radius: initial;
   z-index: 9999;
   box-shadow: initial;
   overflow: hidden;
@@ -206,9 +207,10 @@
 
 .pisces .sidebar {
   box-shadow: none;
-  width: 240px;
   opacity: 0;
   transition: opacity .2s linear;
+  width: 240px;
+  position: relative;
 }
 
 .pisces .site-author-image {
