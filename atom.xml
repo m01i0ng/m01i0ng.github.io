@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-05-22T07:15:12.464Z</updated>
+    <updated>2020-05-24T11:16:10.957Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,31 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[FLutter 生命周期]]></title>
+        <id>https://m01i0ng.js.org/CKg-JiPZN/</id>
+        <link href="https://m01i0ng.js.org/CKg-JiPZN/">
+        </link>
+        <updated>2020-05-24T11:12:42.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="stateless">Stateless</h2>
+<ol>
+<li>构造函数</li>
+<li>build()</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/HxkVhQ.png" alt="HxkVhQ" loading="lazy"></figure>
+<h2 id="stateful">Stateful</h2>
+<ol>
+<li>构造函数</li>
+<li>initState()</li>
+<li>build()</li>
+<li>setState()</li>
+<li>didUpdateWidget()</li>
+<li>build()</li>
+<li>dispose()</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/djvjMy.png" alt="djvjMy" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Flutter 中获取屏幕内容区可用高度]]></title>
         <id>https://m01i0ng.js.org/flutter-zhong-huo-qu-ping-mu-ke-yong-gao-du/</id>
