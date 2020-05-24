@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-05-24T11:16:10.957Z</updated>
+    <updated>2020-05-24T11:31:44.435Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -16,23 +16,61 @@
         <link href="https://m01i0ng.js.org/CKg-JiPZN/">
         </link>
         <updated>2020-05-24T11:12:42.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="stateless">Stateless</h2>
+        <content type="html"><![CDATA[<blockquote>
+<p>除了常见的组件生命周期外，应用本身也存在生命周期</p>
+</blockquote>
+<h2 id="stateless-无状态组件">Stateless 无状态组件</h2>
 <ol>
-<li>构造函数</li>
+<li>constructor</li>
 <li>build()</li>
 </ol>
 <figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/HxkVhQ.png" alt="HxkVhQ" loading="lazy"></figure>
-<h2 id="stateful">Stateful</h2>
+<h2 id="stateful-有状态组件">Stateful 有状态组件</h2>
 <ol>
-<li>构造函数</li>
-<li>initState()</li>
+<li>constructor</li>
+<li>initState() 初始化</li>
 <li>build()</li>
-<li>setState()</li>
-<li>didUpdateWidget()</li>
+<li>setState() 改变状态</li>
+<li>didUpdateWidget() 更新状态</li>
 <li>build()</li>
-<li>dispose()</li>
+<li>dispose() 销毁</li>
 </ol>
 <figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/djvjMy.png" alt="djvjMy" loading="lazy"></figure>
+<h2 id="app-应用">App 应用</h2>
+<ol>
+<li>inactive 刚进入后台</li>
+<li>paused 已进入后台</li>
+<li>resumed 切换到前台</li>
+<li>suspending 被清除前</li>
+</ol>
+<p>要使用 App 生命周期监听：</p>
+<ul>
+<li>组件引用 <code>mixin</code></li>
+<li>添加 <code>Observer</code></li>
+</ul>
+<pre><code class="language-dart">class _HomePageState extends State&lt;HomePage&gt; with WidgetsBindingObserver {
+...
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+...
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
