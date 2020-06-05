@@ -8,7 +8,7 @@
 <meta name="keywords" content="m01i0ng 个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Mac 软件 | Untitled</title>
+<title>Postman 使用 pre-request 脚本自动申请验证 Token | Untitled</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1591335518442">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Mac 软件" />
-  <meta name="keywords" content="Mac" />
+  <meta name="description" content="Postman 使用 pre-request 脚本自动申请验证 Token" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -194,8 +194,7 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -241,222 +240,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%B3%BB%E7%BB%9F">系统</a>
-<ul>
-<li><a href="#dozer">Dozer</a></li>
-<li><a href="#spectacle">Spectacle</a></li>
-<li><a href="#scroll-reverser">Scroll Reverser</a></li>
-<li><a href="#karabiner-elements">Karabiner Elements</a></li>
-<li><a href="#tencent-lemon">Tencent Lemon</a></li>
-<li><a href="#iina">iina</a></li>
-<li><a href="#hand-brake">Hand Brake</a></li>
-<li><a href="#night-owl">Night Owl</a></li>
-<li><a href="#tunnel-blick">Tunnel Blick</a></li>
-</ul>
-</li>
-<li><a href="#%E5%86%99%E4%BD%9C">写作</a>
-<ul>
-<li><a href="#typora">Typora</a></li>
-<li><a href="#mweb">mweb</a></li>
-<li><a href="#pdf-expert">Pdf Expert</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BC%80%E5%8F%91">开发</a>
-<ul>
-<li><a href="#iterm2">iTerm2</a></li>
-<li><a href="#visual-studio-code">Visual Studio Code</a></li>
-<li><a href="#sequel-pro">Sequel Pro</a></li>
-<li><a href="#vmware-fusion">Vmware Fusion</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -544,8 +327,8 @@
           <div class="section bg-color post post-page">
             <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://m01i0ng.js.org/mac-ruan-jian/">
-      Mac 软件
+    <a class="post-title-link" href="https://m01i0ng.js.org/jlZagNwqS/">
+      Postman 使用 pre-request 脚本自动申请验证 Token
     </a>
   </h1>
   <div class="post-meta">
@@ -553,22 +336,9 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span>2020-02-08</span>
+      <span>2020-06-05</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://m01i0ng.js.org/tag/l5oa6Yim0/">
-        <span>Mac</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
@@ -577,12 +347,12 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>254<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>267<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/mac-ruan-jian/" data-flag-title="Mac 软件" class="meta-item pc-show leancloud_visitors">
+    <span id="/jlZagNwqS/" data-flag-title="Postman 使用 pre-request 脚本自动申请验证 Token" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -591,57 +361,69 @@
   </div>
 </header>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="系统">系统</h2>
-<h3 id="dozer">Dozer</h3>
-<p><code>brew cask install dozer</code></p>
-<p>折叠状态栏菜单，与之相对的一款收费软件为 <code>Bartender</code></p>
-<h3 id="spectacle">Spectacle</h3>
-<p><code>brew cask install spectacle</code></p>
-<p>快捷改变窗口尺寸，功能类似 <code>Magnet</code></p>
-<h3 id="scroll-reverser">Scroll Reverser</h3>
-<p><code>brew cask install scroll-reverser</code></p>
-<p>翻转滚轮方向</p>
-<h3 id="karabiner-elements">Karabiner Elements</h3>
-<p><code>brew cask install karabiner-elements</code></p>
-<p>键盘重新映射</p>
-<h3 id="tencent-lemon">Tencent Lemon</h3>
-<p><code>brew cask install tencent-lemon</code></p>
-<p>系统清理、网速硬盘等状态栏显示，相当于免费版 <code>CleanMyMac</code></p>
-<h3 id="iina">iina</h3>
-<p><code>brew cask install iina</code></p>
-<p>播放器</p>
-<h3 id="hand-brake">Hand Brake</h3>
-<p><code>brew cask install handbrake</code></p>
-<p>视频转码</p>
-<h3 id="night-owl">Night Owl</h3>
-<p><code>brew cask install nightowl</code></p>
-<p>定时自动切换黑暗模式</p>
-<h3 id="tunnel-blick">Tunnel Blick</h3>
-<p><code>brew cask install tunnelblick-beta</code></p>
-<p>VPN 连接</p>
-<h2 id="写作">写作</h2>
-<h3 id="typora">Typora</h3>
-<p><code>brew cask install typora</code></p>
-<p>Markdown 编辑器，干净，全平台支持，免费软件中最佳</p>
-<h3 id="mweb">mweb</h3>
-<p><code>brew cask install mweb</code></p>
-<p>Markdown 编辑器，分类功能比较强，原生开发性能较高</p>
-<h3 id="pdf-expert">Pdf Expert</h3>
-<p><code>brew cask install pdf-expert</code></p>
-<p>pdf 阅读器</p>
-<h2 id="开发">开发</h2>
-<h3 id="iterm2">iTerm2</h3>
-<p><code>brew cask install iterm2</code></p>
-<p>终端模拟器</p>
-<h3 id="visual-studio-code">Visual Studio Code</h3>
-<p><code>brew cask install visual-sdudio-code</code></p>
-<p>代码编辑器</p>
-<h3 id="sequel-pro">Sequel Pro</h3>
-<p><code>brew cask install sequel-pro-nightly</code></p>
-<p>MySQL 可视化工具</p>
-<h3 id="vmware-fusion">Vmware Fusion</h3>
-<p><code>brew cask install vmware-fusion</code></p>
-<p>Vmware 虚拟机</p>
+              <ol>
+<li>首先新建一个 <strong>Collection</strong>，定义一个变量 <code>token</code> 来存储</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/CleanShot%202020-06-05%20at%2013.26.44.png" alt="CleanShot2020-06-05at13.26.44" loading="lazy"></figure>
+<ol start="2">
+<li>然后下面新建两个子 <strong>Collection</strong>，分别存储需要验证和不需要验证的 Api 接口</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/XLu3I6.png" alt="XLu3I6" loading="lazy"></figure>
+<ol start="3">
+<li>编辑 <strong>需要验证</strong> 的文件夹，添加验证方法 <strong>Bearer Token</strong></li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/ZYN5RA.png" alt="ZYN5RA" loading="lazy"></figure>
+<ol start="4">
+<li><strong>Pre-request Scripts</strong> 下编写脚本发送验证请求</li>
+</ol>
+<pre><code class="language-js">pm.sendRequest({
+    url: pm.collectionVariables.get('base-url') + '/auth/oauth/token', // 登录获取 Token 接口
+    method: 'POST',
+    header: {
+        'Content-Type': 'multipart/form-data', // formdata 形式发送(视实际情况而定)
+        Authorization: 'Basic YXBwOjEyMzQ1Ng==' // 请求头(视实际情况而定)
+    },
+    // 下面是请求数据 body
+    body: {
+        mode: 'formdata',
+        formdata: [
+            {
+                key: 'username',
+                value: 'm01i0ng',
+                disabled: false,
+            },
+            {
+                key: 'password',
+                value: 'secret',
+                disabled: false,
+            },
+            {
+                key: 'grant_type',
+                value: 'password',
+                disabled: false,
+            },
+            {
+                key: 'scope',
+                value: 'read',
+                disabled: false,
+            }
+        ]
+    }
+}, function(err, res) {
+    const data = res.json()
+    pm.collectionVariables.set('token', data.access_token) // 请求成功之后，调用方法更新 token 变量从而更新 Token
+})
+</code></pre>
+<p>如图：</p>
+<figure data-type="image" tabindex="4"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/buwq2v.png" alt="buwq2v" loading="lazy"></figure>
+<ol start="5">
+<li><strong>需要验证</strong> 下面新建的所有 Api 接口，验证方式选择 <strong>Inherit auth from parent</strong></li>
+</ol>
+<figure data-type="image" tabindex="5"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/QxVZLr.png" alt="QxVZLr" loading="lazy"></figure>
+<ol start="6">
+<li>尝试执行 Api，现在每次发送请求之前都会自动获取更新 Token，如果有问题可以用 <code>console.log()</code> 配合 Postman 控制台查看输出</li>
+</ol>
+<figure data-type="image" tabindex="6"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/6SEIST.png" alt="6SEIST" loading="lazy"></figure>
 
             </div>
             
@@ -653,7 +435,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://m01i0ng.js.org/mac-ruan-jian/" title="Mac 软件">https://m01i0ng.js.org/mac-ruan-jian/</a>
+      <a href="https://m01i0ng.js.org/jlZagNwqS/" title="Postman 使用 pre-request 脚本自动申请验证 Token">https://m01i0ng.js.org/jlZagNwqS/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -662,21 +444,15 @@
   </ul>
   <div class="tags">
     
-      <a href="https://m01i0ng.js.org/tag/l5oa6Yim0/"># Mac</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Spring Boot 中使用 RedisTemplate 进行 scan 操作" href="https://m01i0ng.js.org/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">Spring Boot 中使用 RedisTemplate 进行 scan 操作</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Spring Boot 中使用 RedisTemplate 进行 scan 操作" href="https://m01i0ng.js.org/spring-boot-zhong-shi-yong-redistemplate-jin-xing-scan-cao-zuo/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Mac 开发环境搭建" href="https://m01i0ng.js.org/mac-kai-fa-huan-jing-da-jian/">Mac 开发环境搭建</a>
-        <a class="nav-mobile-next" title="Mac 开发环境搭建" href="https://m01i0ng.js.org/mac-kai-fa-huan-jing-da-jian/">下一篇</a>
+        <a class="nav-pc-next" title="Flutter 系列笔记（2）组件和应用生命周期" href="https://m01i0ng.js.org/CKg-JiPZN/">Flutter 系列笔记（2）组件和应用生命周期</a>
+        <a class="nav-mobile-next" title="Flutter 系列笔记（2）组件和应用生命周期" href="https://m01i0ng.js.org/CKg-JiPZN/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

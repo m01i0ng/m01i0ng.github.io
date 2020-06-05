@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-05-24T13:18:31.687Z</updated>
+    <updated>2020-06-05T05:38:42.459Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,77 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[Postman 使用 pre-request 脚本自动申请验证 Token]]></title>
+        <id>https://m01i0ng.js.org/jlZagNwqS/</id>
+        <link href="https://m01i0ng.js.org/jlZagNwqS/">
+        </link>
+        <updated>2020-06-05T05:19:55.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>首先新建一个 <strong>Collection</strong>，定义一个变量 <code>token</code> 来存储</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/CleanShot%202020-06-05%20at%2013.26.44.png" alt="CleanShot2020-06-05at13.26.44" loading="lazy"></figure>
+<ol start="2">
+<li>然后下面新建两个子 <strong>Collection</strong>，分别存储需要验证和不需要验证的 Api 接口</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/XLu3I6.png" alt="XLu3I6" loading="lazy"></figure>
+<ol start="3">
+<li>编辑 <strong>需要验证</strong> 的文件夹，添加验证方法 <strong>Bearer Token</strong></li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/ZYN5RA.png" alt="ZYN5RA" loading="lazy"></figure>
+<ol start="4">
+<li><strong>Pre-request Scripts</strong> 下编写脚本发送验证请求</li>
+</ol>
+<pre><code class="language-js">pm.sendRequest({
+    url: pm.collectionVariables.get('base-url') + '/auth/oauth/token', // 登录获取 Token 接口
+    method: 'POST',
+    header: {
+        'Content-Type': 'multipart/form-data', // formdata 形式发送(视实际情况而定)
+        Authorization: 'Basic YXBwOjEyMzQ1Ng==' // 请求头(视实际情况而定)
+    },
+    // 下面是请求数据 body
+    body: {
+        mode: 'formdata',
+        formdata: [
+            {
+                key: 'username',
+                value: 'm01i0ng',
+                disabled: false,
+            },
+            {
+                key: 'password',
+                value: 'secret',
+                disabled: false,
+            },
+            {
+                key: 'grant_type',
+                value: 'password',
+                disabled: false,
+            },
+            {
+                key: 'scope',
+                value: 'read',
+                disabled: false,
+            }
+        ]
+    }
+}, function(err, res) {
+    const data = res.json()
+    pm.collectionVariables.set('token', data.access_token) // 请求成功之后，调用方法更新 token 变量从而更新 Token
+})
+</code></pre>
+<p>如图：</p>
+<figure data-type="image" tabindex="4"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/buwq2v.png" alt="buwq2v" loading="lazy"></figure>
+<ol start="5">
+<li><strong>需要验证</strong> 下面新建的所有 Api 接口，验证方式选择 <strong>Inherit auth from parent</strong></li>
+</ol>
+<figure data-type="image" tabindex="5"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/QxVZLr.png" alt="QxVZLr" loading="lazy"></figure>
+<ol start="6">
+<li>尝试执行 Api，现在每次发送请求之前都会自动获取更新 Token，如果有问题可以用 <code>console.log()</code> 配合 Postman 控制台查看输出</li>
+</ol>
+<figure data-type="image" tabindex="6"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/6SEIST.png" alt="6SEIST" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Flutter 系列笔记（2）组件和应用生命周期]]></title>
         <id>https://m01i0ng.js.org/CKg-JiPZN/</id>
@@ -795,111 +866,6 @@ EXPOSE 80
 </code></pre>
 <p>执行 <code>docker build -t m01i0ng/demo .</code> 就会生成镜像</p>
 <p>跟最终 release 镜像无关的文件依赖等等都要放在构建阶段</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[规范你的 commit 信息]]></title>
-        <id>https://m01i0ng.js.org/gui-fan-ni-de-commit-xin-xi/</id>
-        <link href="https://m01i0ng.js.org/gui-fan-ni-de-commit-xin-xi/">
-        </link>
-        <updated>2020-02-08T05:34:41.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="commit-message-格式">Commit Message 格式</h2>
-<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
-&lt;BLANK LINE&gt;
-&lt;body&gt;
-&lt;BLANK LINE&gt;
-&lt;footer&gt;
-</code></pre>
-<p>参考 <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines">Angular</a> 规范</p>
-<p>通过 git commit 命令带出的 vim 界面填写的最终结果应该类似如上这个结构, 大致分为三个部分(使用空行分割)：</p>
-<ul>
-<li>标题行：必填, 描述主要修改类型和内容</li>
-<li>主题内容：描述为什么修改, 做了什么样的修改, 以及开发的思路等等</li>
-<li>页脚注释：放 Breaking Changes 或 Closed Issues</li>
-</ul>
-<p>分别由如下部分构成：</p>
-<ul>
-<li>type: commit 的类型</li>
-<li>feat: 新特性</li>
-<li>fix: 修改问题</li>
-<li>refactor: 代码重构</li>
-<li>docs: 文档修改</li>
-<li>style: 代码格式修改，注意不是 css 修改</li>
-<li>test: 测试用例修改</li>
-<li>chore: 其他修改，比如构建流程，依赖管理</li>
-<li>scope: commit 影响的范围，比如：route, component, utils, build...</li>
-<li>subject: commit 的概述，建议符合 50/72 formatting</li>
-<li>body: commit 具体修改内容，可以分为多行，建议符合 50/72 formatting</li>
-<li>footer: 一些备注，通常是 BREAKING CHANGE 或修复的 bug 的链接</li>
-</ul>
-<h2 id="git-commit-模板">Git Commit 模板</h2>
-<p>修改 ~/.gitconfig，添加：</p>
-<pre><code>[commit]
-template = ~/.gitmessage
-</code></pre>
-<p>新建 ~/.gitmessage 内容可以如下：</p>
-<pre><code># head: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
-# - type: feat, fix, docs, style, refactor, test, chore
-# - scope: can be empty (eg. if the change is a global or difficult to assign to a single component)
-# - subject: start with verb (such as 'change'), 50-character line
-#
-# body: 72-character wrapped. This should answer:
-# * Why was this change necessary?
-# * How does it address the problem?
-# * Are there any side effects?
-#
-# footer:
-# - Include a link to the ticket, if any.
-# - BREAKING CHANGE
-#
-</code></pre>
-<h2 id="commitizen替代你的-git-commit">Commitizen：替代你的 Git Commit</h2>
-<p><a href="https://github.com/commitizen/cz-cli">commitizen/cz-cli</a>，我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message</p>
-<p>除此之外，我们还需要为 commitizen 指定一个 Adapter 比如：<a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a> (一个符合 Angular 团队规范的 preset)。使得 commitizen 按照我们指定的规范帮助我们生成 commit message</p>
-<h3 id="全局安装推荐">全局安装（推荐）</h3>
-<pre><code class="language-bash">npm install -g commitizen cz-conventional-changelog
-echo '{ &quot;path&quot;: &quot;cz-conventional-changelog&quot; }' &gt; ~/.czrc
-</code></pre>
-<h3 id="项目级安装">项目级安装</h3>
-<blockquote>
-<p>如果不是 node 项目可以用 <code>npm init -y</code> 生成 <code>package.josn</code></p>
-</blockquote>
-<pre><code class="language-bash">npm install -D commitizen cz-conventional-changelog
-</code></pre>
-<p>package.json 中配置：</p>
-<pre><code class="language-json">&quot;script&quot;: {
-    ...,
-    &quot;commit&quot;: &quot;git-cz&quot;,
-},
- &quot;config&quot;: {
-    &quot;commitizen&quot;: {
-      &quot;path&quot;: &quot;node_modules/cz-conventional-changelog&quot;
-    }
-  }
-</code></pre>
-<p>如果全局安装过 Commitizen，那么在对应的项目中执行 <code>git cz</code> 或 <code>npm run commit</code> 都可以</p>
-<h3 id="commitlint校验你的-message">Commitlint：校验你的 message</h3>
-<p><a href="https://github.com/marionebl/commitlint">commitlint</a> 可以帮助我们 lint commit messages, 如果我们提交的不符合指向的规范, 直接拒绝提交</p>
-<p>校验配置推荐 <a href="https://github.com/marionebl/commitlint/tree/master/@commitlint/config-conventional">@commitlint/config-conventional</a></p>
-<p>同时需要在项目目录下创建配置文件 .commitlintrc.js，写入：</p>
-<pre><code class="language-js">module.exports = {
-  extends: ['@commitlint/config-conventional'],
-  rules: {},
-}
-</code></pre>
-<h3 id="standard-version自动生成-changelog">standard-version：自动生成 CHANGELOG</h3>
-<p>通过以上工具的帮助，我们的 commit message 应该是符合 Angular 团队那套，这样也便于我们借助 standard-version 这样的工具，自动生成 CHANGELOG，甚至是 语义化的版本号(Semantic Version)</p>
-<p>安装使用：</p>
-<pre><code class="language-bash">npm i -S standard-version
-</code></pre>
-<p>package.json 配置：</p>
-<pre><code class="language-json">&quot;scirpt&quot;: {
-    ...,
-    &quot;release&quot;: &quot;standard-version&quot;
-}
-</code></pre>
-<h2 id="最后">最后</h2>
-<p>遵守以上提交规范的同时，<strong>禁止</strong>使用诸如 <code>git commit -am</code> 方式提交 Commit Message</p>
 ]]></content>
     </entry>
 </feed>

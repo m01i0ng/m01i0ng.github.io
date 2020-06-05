@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Untitled</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1590326305851">
+<link rel="shortcut icon" href="/favicon.ico?v=1591335518442">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -188,7 +188,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">10</span>
+        <span class="site-item-stat-count">11</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -249,6 +249,8 @@
       
       
         
+      
+        
           
             
       
@@ -293,6 +295,8 @@
       <a class="cloud-tag" href="https://m01i0ng.js.org/tag/flutter/" rel="2">Flutter</a>
     
       
+      
+        
       
         
           
@@ -341,6 +345,8 @@
       
       
         
+      
+        
           
         
       
@@ -387,6 +393,8 @@
       
       
         
+      
+        
           
         
       
@@ -429,6 +437,8 @@
       <a class="cloud-tag" href="https://m01i0ng.js.org/tag/LbGnNImX8/" rel="1">k8s</a>
     
       
+      
+        
       
         
           
@@ -477,6 +487,8 @@
       
       
         
+      
+        
           
         
       
@@ -519,6 +531,8 @@
       <a class="cloud-tag" href="https://m01i0ng.js.org/tag/9sjiteWCc/" rel="1">git</a>
     
       
+      
+        
       
         
           
@@ -1354,6 +1368,74 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://m01i0ng.js.org/jlZagNwqS/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;首先新建一个 &lt;strong&gt;Collection&lt;/strong&gt;，定义一个变量 &lt;code&gt;token&lt;/code&gt; 来存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/CleanShot%202020-06-05%20at%2013.26.44.png&#34; alt=&#34;CleanShot2020-06-05at13.26.44&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;然后下面新建两个子 &lt;strong&gt;Collection&lt;/strong&gt;，分别存储需要验证和不需要验证的 Api 接口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/XLu3I6.png&#34; alt=&#34;XLu3I6&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;编辑 &lt;strong&gt;需要验证&lt;/strong&gt; 的文件夹，添加验证方法 &lt;strong&gt;Bearer Token&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/ZYN5RA.png&#34; alt=&#34;ZYN5RA&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Pre-request Scripts&lt;/strong&gt; 下编写脚本发送验证请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;pm.sendRequest({
+    url: pm.collectionVariables.get(&#39;base-url&#39;) + &#39;/auth/oauth/token&#39;, // 登录获取 Token 接口
+    method: &#39;POST&#39;,
+    header: {
+        &#39;Content-Type&#39;: &#39;multipart/form-data&#39;, // formdata 形式发送(视实际情况而定)
+        Authorization: &#39;Basic YXBwOjEyMzQ1Ng==&#39; // 请求头(视实际情况而定)
+    },
+    // 下面是请求数据 body
+    body: {
+        mode: &#39;formdata&#39;,
+        formdata: [
+            {
+                key: &#39;username&#39;,
+                value: &#39;m01i0ng&#39;,
+                disabled: false,
+            },
+            {
+                key: &#39;password&#39;,
+                value: &#39;secret&#39;,
+                disabled: false,
+            },
+            {
+                key: &#39;grant_type&#39;,
+                value: &#39;password&#39;,
+                disabled: false,
+            },
+            {
+                key: &#39;scope&#39;,
+                value: &#39;read&#39;,
+                disabled: false,
+            }
+        ]
+    }
+}, function(err, res) {
+    const data = res.json()
+    pm.collectionVariables.set(&#39;token&#39;, data.access_token) // 请求成功之后，调用方法更新 token 变量从而更新 Token
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/buwq2v.png&#34; alt=&#34;buwq2v&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;strong&gt;需要验证&lt;/strong&gt; 下面新建的所有 Api 接口，验证方式选择 &lt;strong&gt;Inherit auth from parent&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/QxVZLr.png&#34; alt=&#34;QxVZLr&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;尝试执行 Api，现在每次发送请求之前都会自动获取更新 Token，如果有问题可以用 &lt;code&gt;console.log()&lt;/code&gt; 配合 Postman 控制台查看输出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/6SEIST.png&#34; alt=&#34;6SEIST&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">Postman 使用 pre-request 脚本自动申请验证 Token</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://m01i0ng.js.org/CKg-JiPZN/"" data-c="
