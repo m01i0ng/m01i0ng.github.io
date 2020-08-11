@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Untitled</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1591335518442">
+<link rel="shortcut icon" href="/favicon.ico?v=1597138971685">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -189,7 +189,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">11</span>
+        <span class="site-item-stat-count">12</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -247,7 +247,7 @@
   <div class="archive-timeline-box">
     <div class="archive-timeline-title">
       
-        <h2 class="language" data-lan="archives" data-count="11">非常好！目前共计11篇日志，继续努力！</h2>
+        <h2 class="language" data-lan="archives" data-count="12">非常好！目前共计12篇日志，继续努力！</h2>
       
     </div>
     
@@ -257,6 +257,19 @@
           <h2 class="tag-year">2020</h2>
         </div>    
         
+      
+      <a href="https://m01i0ng.js.org/mNqBPPh6J/">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              08-11
+              <small>Spring Boot 配置使用 Redis 缓存 Json 值</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
       
       <a href="https://m01i0ng.js.org/jlZagNwqS/">
         <div class="motion-warpper tag-archive-node">
@@ -1154,6 +1167,123 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://m01i0ng.js.org/mNqBPPh6J/"" data-c="
+          &lt;h1 id=&#34;spring-boot-使用-redis-缓存&#34;&gt;Spring Boot 使用 Redis 缓存&lt;/h1&gt;
+&lt;h2 id=&#34;首先引入依赖&#34;&gt;首先引入依赖&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;配置-redis-并开启缓存&#34;&gt;配置 Redis 并开启缓存&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Configuration
+@EnableCaching
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+public class RedisCacheConfig extends CachingConfigurerSupport {
+
+    @Resource
+    private Jackson2ObjectMapperBuilder builder;
+
+    @Bean
+    public RedisTemplate&amp;lt;String, Serializable&amp;gt; redisTemplate(LettuceConnectionFactory factory) {
+        RedisTemplate&amp;lt;String, Serializable&amp;gt; template = new RedisTemplate&amp;lt;&amp;gt;();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new Jackson2JsonRedisSerializer&amp;lt;&amp;gt;(Serializable.class));
+        template.afterPropertiesSet();
+
+        return template;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时即可使用相关缓存注解&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Cacheable
+@CachePut
+@CacheEvict
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@ApiOperation(&amp;quot;根据 ID 获取&amp;quot;)
+@GetMapping(&amp;quot;/{id}&amp;quot;)
+@Cacheable(value = &amp;quot;company&amp;quot;, key = &amp;quot;#id&amp;quot;)
+public CompanyVO getById(@PathVariable Long id) {
+    return companyConverter.companyToCompanyVO(companyService.getById(id));
+}
+
+@ApiOperation(&amp;quot;根据 ID 修改&amp;quot;)
+@PutMapping(&amp;quot;/{id}&amp;quot;)
+@CacheEvict(value = &amp;quot;company&amp;quot;, key = &amp;quot;#id&amp;quot;, beforeInvocation = true)
+public void updateById(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
+    Company company = companyConverter.companyDTOToCompany(companyDTO);
+    company.setId(id);
+    companyService.updateById(company);
+}
+
+@ApiOperation(&amp;quot;根据 ID 删除&amp;quot;)
+@DeleteMapping(&amp;quot;/{id}&amp;quot;)
+@CacheEvict(value = &amp;quot;company&amp;quot;, key = &amp;quot;#id&amp;quot;, beforeInvocation = true)
+public void deleteById(@PathVariable Long id) {
+    companyService.removeById(id);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Redis 中生成的缓存为 &lt;code&gt;company::#id&lt;/code&gt; 比如 &lt;code&gt;company::44&lt;/code&gt;，如需更改键生成策略则需要自定义 &lt;code&gt;KeyGenerator&lt;/code&gt; 复写其生成逻辑。&lt;br&gt;
+但此时我们看到 Redis 中存储的为二进制格式，如遇到问题不方便排查，我们可以自定义 &lt;code&gt;CacheManager&lt;/code&gt; 来修改值为 Json 存储&lt;/p&gt;
+&lt;h2 id=&#34;配置-redis-中值存储为-json&#34;&gt;配置 Redis 中值存储为 Json&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;RedisConfig&lt;/code&gt; 类中新增如下逻辑&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Configuration
+@EnableCaching
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+public class RedisCacheConfig extends CachingConfigurerSupport {
+
+    @Resource
+    private Jackson2ObjectMapperBuilder builder;
+
+    @Bean
+    public RedisTemplate&amp;lt;String, Serializable&amp;gt; redisTemplate(LettuceConnectionFactory factory) {
+        RedisTemplate&amp;lt;String, Serializable&amp;gt; template = new RedisTemplate&amp;lt;&amp;gt;();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new Jackson2JsonRedisSerializer&amp;lt;&amp;gt;(Serializable.class));
+        template.afterPropertiesSet();
+
+        return template;
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager(LettuceConnectionFactory factory) {
+        Jackson2JsonRedisSerializer&amp;lt;Serializable&amp;gt; serializer = new Jackson2JsonRedisSerializer&amp;lt;&amp;gt;(Serializable.class);
+        ObjectMapper objectMapper = builder.build();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY);
+
+        serializer.setObjectMapper(objectMapper);
+
+        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
+
+        return RedisCacheManager.builder(factory).cacheDefaults(configuration).build();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同时需要再引入 Jackson 依赖使其能进行时间日期的序列化&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;com.fasterxml.jackson.datatype&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;jackson-datatype-jsr310&amp;lt;/artifactId&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;配置文件中加入&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时再看 Redis 中生成的缓存值&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/IMG_7089.PNG&#34; alt=&#34;IMG_7089&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;大功告成！&lt;/p&gt;
+">Spring Boot 配置使用 Redis 缓存 Json 值</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://m01i0ng.js.org/jlZagNwqS/"" data-c="

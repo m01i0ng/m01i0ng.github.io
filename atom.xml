@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-06-05T05:38:42.459Z</updated>
+    <updated>2020-08-11T09:43:02.266Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,126 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[Spring Boot 配置使用 Redis 缓存 Json 值]]></title>
+        <id>https://m01i0ng.js.org/mNqBPPh6J/</id>
+        <link href="https://m01i0ng.js.org/mNqBPPh6J/">
+        </link>
+        <updated>2020-08-11T09:42:19.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="spring-boot-使用-redis-缓存">Spring Boot 使用 Redis 缓存</h1>
+<h2 id="首先引入依赖">首先引入依赖</h2>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="配置-redis-并开启缓存">配置 Redis 并开启缓存</h2>
+<pre><code class="language-java">@Configuration
+@EnableCaching
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+public class RedisCacheConfig extends CachingConfigurerSupport {
+
+    @Resource
+    private Jackson2ObjectMapperBuilder builder;
+
+    @Bean
+    public RedisTemplate&lt;String, Serializable&gt; redisTemplate(LettuceConnectionFactory factory) {
+        RedisTemplate&lt;String, Serializable&gt; template = new RedisTemplate&lt;&gt;();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new Jackson2JsonRedisSerializer&lt;&gt;(Serializable.class));
+        template.afterPropertiesSet();
+
+        return template;
+    }
+}
+</code></pre>
+<p>此时即可使用相关缓存注解</p>
+<pre><code>@Cacheable
+@CachePut
+@CacheEvict
+</code></pre>
+<pre><code class="language-java">@ApiOperation(&quot;根据 ID 获取&quot;)
+@GetMapping(&quot;/{id}&quot;)
+@Cacheable(value = &quot;company&quot;, key = &quot;#id&quot;)
+public CompanyVO getById(@PathVariable Long id) {
+    return companyConverter.companyToCompanyVO(companyService.getById(id));
+}
+
+@ApiOperation(&quot;根据 ID 修改&quot;)
+@PutMapping(&quot;/{id}&quot;)
+@CacheEvict(value = &quot;company&quot;, key = &quot;#id&quot;, beforeInvocation = true)
+public void updateById(@PathVariable Long id, @RequestBody CompanyDTO companyDTO) {
+    Company company = companyConverter.companyDTOToCompany(companyDTO);
+    company.setId(id);
+    companyService.updateById(company);
+}
+
+@ApiOperation(&quot;根据 ID 删除&quot;)
+@DeleteMapping(&quot;/{id}&quot;)
+@CacheEvict(value = &quot;company&quot;, key = &quot;#id&quot;, beforeInvocation = true)
+public void deleteById(@PathVariable Long id) {
+    companyService.removeById(id);
+}
+</code></pre>
+<p>Redis 中生成的缓存为 <code>company::#id</code> 比如 <code>company::44</code>，如需更改键生成策略则需要自定义 <code>KeyGenerator</code> 复写其生成逻辑。<br>
+但此时我们看到 Redis 中存储的为二进制格式，如遇到问题不方便排查，我们可以自定义 <code>CacheManager</code> 来修改值为 Json 存储</p>
+<h2 id="配置-redis-中值存储为-json">配置 Redis 中值存储为 Json</h2>
+<p><code>RedisConfig</code> 类中新增如下逻辑</p>
+<pre><code class="language-java">@Configuration
+@EnableCaching
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+public class RedisCacheConfig extends CachingConfigurerSupport {
+
+    @Resource
+    private Jackson2ObjectMapperBuilder builder;
+
+    @Bean
+    public RedisTemplate&lt;String, Serializable&gt; redisTemplate(LettuceConnectionFactory factory) {
+        RedisTemplate&lt;String, Serializable&gt; template = new RedisTemplate&lt;&gt;();
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new Jackson2JsonRedisSerializer&lt;&gt;(Serializable.class));
+        template.afterPropertiesSet();
+
+        return template;
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager(LettuceConnectionFactory factory) {
+        Jackson2JsonRedisSerializer&lt;Serializable&gt; serializer = new Jackson2JsonRedisSerializer&lt;&gt;(Serializable.class);
+        ObjectMapper objectMapper = builder.build();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY);
+
+        serializer.setObjectMapper(objectMapper);
+
+        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
+
+        return RedisCacheManager.builder(factory).cacheDefaults(configuration).build();
+    }
+}
+</code></pre>
+<p>同时需要再引入 Jackson 依赖使其能进行时间日期的序列化</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-datatype-jsr310&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>配置文件中加入</p>
+<pre><code class="language-yaml">spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+</code></pre>
+<p>此时再看 Redis 中生成的缓存值</p>
+<figure data-type="image" tabindex="1"><img src="https://8023-1251563214.cos.ap-beijing.myqcloud.com/uPic/IMG_7089.PNG" alt="IMG_7089" loading="lazy"></figure>
+<p>大功告成！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Postman 使用 pre-request 脚本自动申请验证 Token]]></title>
         <id>https://m01i0ng.js.org/jlZagNwqS/</id>
@@ -823,49 +943,6 @@ kubectl delete deploy nginx
 <li>部署完成之后想增加节点只要按照子节点部署的步骤进行即可，之后可以参考官方文档安装 <code>dashboard heapster</code> 等插件</li>
 <li>此为单主多子节点配置，多主多子配置方法有所不同，日后再说--</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Docker 镜像的分阶段构建]]></title>
-        <id>https://m01i0ng.js.org/docker-jing-xiang-de-fen-jie-duan-gou-jian/</id>
-        <link href="https://m01i0ng.js.org/docker-jing-xiang-de-fen-jie-duan-gou-jian/">
-        </link>
-        <updated>2020-02-08T05:37:14.000Z</updated>
-        <content type="html"><![CDATA[<p>Docker 镜像内部寸土寸金，如何能尽量减小镜像的大小，其中一个方法是多阶段构建<br>
-一些语言项目例如前端、Go 等，其构建阶段需要一堆依赖如 <code>node_modules</code>、<code>vendor</code> 等，但运行阶段只需要 build 出来的静态页面或二进制文件，所以要将构建和运行分开为两个阶段，最终镜像中只包含 build 的结果</p>
-<p>以前端项目举例，目录结构如下：</p>
-<pre><code>├── .docker
-├── .dockerignore
-├── Dockerfile
-├── README.md
-├── node_modules
-├── package.json
-├── public
-├── src
-└── yarn.lock
-</code></pre>
-<p>.docker 文件夹中存放了 nginx 的配置<br>
-.dockerignore 文件写不希望添加到镜像中的文件，比如 <code>node_modules</code><br>
-Dockerfile 是主角，内容如下：</p>
-<pre><code class="language-Dockerfile"># 第一阶段，拉取 node 基础镜像并安装依赖，执行构建
-FROM node:11-alpine as builder
-
-WORKDIR /tmp
-COPY . .
-RUN npm config set registry https://registry.npm.taobao.org \
-    &amp;&amp; npm i -g yarn
-RUN yarn &amp;&amp; yarn build
-
-# 第二阶段，将构建完的产物 build 文件夹 COPY 到实际 release 的镜像中，会丢弃第一阶段中其他的文件
-FROM nginx:alpine
-
-COPY .docker/conf/default.conf /etc/nginx/conf.d/
-COPY --from=builder /tmp/build /usr/share/nginx/html
-
-EXPOSE 80
-</code></pre>
-<p>执行 <code>docker build -t m01i0ng/demo .</code> 就会生成镜像</p>
-<p>跟最终 release 镜像无关的文件依赖等等都要放在构建阶段</p>
 ]]></content>
     </entry>
 </feed>
