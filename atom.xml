@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-08-11T09:43:02.266Z</updated>
+    <updated>2020-08-14T02:43:51.087Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -10,6 +10,218 @@
     <logo>https://m01i0ng.js.org/images/avatar.png</logo>
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
+    <entry>
+        <title type="html"><![CDATA[使用 Golang 构建一个简单地 TCP 服务]]></title>
+        <id>https://m01i0ng.js.org/2SxOltbTK/</id>
+        <link href="https://m01i0ng.js.org/2SxOltbTK/">
+        </link>
+        <updated>2020-08-14T02:43:14.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="使用-golang-构建一个简单地-tcp-服务">使用 Golang 构建一个简单地 TCP 服务</h1>
+<p>Golang 原生的协程使其在处理高并发方面很有优势，下面使用 Go 来简单实现个支持并发的 TCP 服务器</p>
+<h2 id="首先实现客户端">首先实现客户端</h2>
+<p>首先定义针对客户端的结构体，包含连接、地址和一个用来接收停止信号的 chan</p>
+<pre><code class="language-go">type client struct {
+	connection *net.Conn
+	addr       *net.TCPAddr
+	stopChan   chan struct{}
+}
+</code></pre>
+<p>然后为其定义数据处理方法，handler</p>
+<pre><code class="language-go">func (c *client) handler() {
+	defer c.connection.Close()
+	//根据连接初始化 reader
+	reader := bufio.NewReader(c.connection)
+	//阻塞，读取数据
+	for {
+		buf := make([]byte, 1024)
+		//n 为读取到的数据长度
+		n, err := reader.Read(buf)
+		if err != nil {
+			if err == io.EOF {
+				//如果是 EOF 代表已经失去客户端连接，在这里直接释放这个 client
+				close(c.stopChan)
+				break
+			}
+			golog.Errorf(&quot;read error: %v&quot;, err)
+			continue
+		}
+		bytes := buf[:n]
+		golog.Infof(&quot;recv: %s&quot;, bytes)
+		//直接将发送过来的数据回写
+		_, err = c.connection.Write(bytes)
+		if err != nil {
+			golog.Errorf(&quot;write error: %v&quot;, err)
+			continue
+		}
+	}
+}
+</code></pre>
+<p>完整代码如下</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;bufio&quot;
+	&quot;io&quot;
+	&quot;net&quot;
+
+	&quot;github.com/kataras/golog&quot;
+)
+
+type client struct {
+	connection *net.TCPConn
+	addr       *net.TCPAddr
+	stopChan   chan struct{}
+}
+
+func (c *client) handler() {
+	defer c.connection.Close()
+	//根据连接初始化 reader
+	reader := bufio.NewReader(c.connection)
+	//阻塞，读取数据
+	for {
+		buf := make([]byte, 1024)
+		//n 为读取到的数据长度
+		n, err := reader.Read(buf)
+		if err != nil {
+			if err == io.EOF {
+				//如果是 EOF 代表连接断开，在这里直接释放这个 client
+				close(c.stopChan)
+				break
+			}
+			golog.Errorf(&quot;read error: %v&quot;, err)
+			continue
+		}
+		bytes := buf[:n]
+		golog.Infof(&quot;recv: %s&quot;, bytes)
+		//直接将发送过来的数据回写
+		_, err = c.connection.Write(bytes)
+		if err != nil {
+			golog.Errorf(&quot;write error: %v&quot;, err)
+			continue
+		}
+	}
+}
+
+func main() {
+	//建立 TCP 连接
+	addr, err := net.ResolveTCPAddr(&quot;tcp&quot;, &quot;127.0.0.1:8000&quot;)
+	if err != nil {
+		golog.Fatalf(&quot;resolve addr error: %v&quot;, err)
+	}
+
+	conn, err := net.DialTCP(&quot;tcp&quot;, nil, addr)
+	if err != nil {
+		golog.Fatalf(&quot;dial tcp error: %v&quot;, err)
+	}
+
+	client := &amp;client{
+		connection: conn,
+		addr:       addr,
+		stopChan:   make(chan struct{}),
+	}
+
+	//开启协程处理
+	go client.handler()
+
+	//开启 channel 等待，当 chan 被关闭时退出
+	&lt;-client.stopChan
+}
+</code></pre>
+<h2 id="实现服务端">实现服务端</h2>
+<p>封装服务端结构体，包含 listener 和 addr</p>
+<pre><code class="language-go">type server struct {
+	listener *net.TCPListener
+	addr     *net.TCPAddr
+}
+</code></pre>
+<p>定义连接处理方法</p>
+<pre><code class="language-go">//处理方法
+func handle(conn net.Conn) {
+	defer conn.Close()
+	golog.Infof(&quot;new client: %s&quot;, conn.RemoteAddr().String())
+	reader := bufio.NewReader(conn)
+	for {
+		buf := make([]byte, 1024)
+		n, err := reader.Read(buf)
+		if err != nil {
+			if err == io.EOF {
+				golog.Errorf(&quot;client closed: %s&quot;, conn.RemoteAddr().String())
+				return
+			}
+			continue
+		}
+		//回写
+		conn.Write(buf[:n])
+	}
+}
+</code></pre>
+<p>建立连接，完整代码如下</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;bufio&quot;
+	&quot;io&quot;
+	&quot;net&quot;
+
+	&quot;github.com/kataras/golog&quot;
+)
+
+type server struct {
+	listener *net.TCPListener
+	addr     *net.TCPAddr
+}
+
+//处理方法
+func handle(conn net.Conn) {
+	//此处可定义状态机，处理连接的不同状态和数据包结构
+	defer conn.Close()
+	golog.Infof(&quot;new client: %s&quot;, conn.RemoteAddr().String())
+	reader := bufio.NewReader(conn)
+	for {
+		buf := make([]byte, 1024)
+		n, err := reader.Read(buf)
+		if err != nil {
+			if err == io.EOF {
+				golog.Errorf(&quot;client closed: %s&quot;, conn.RemoteAddr().String())
+				return
+			}
+			continue
+		}
+		//回写
+		conn.Write(buf[:n])
+	}
+}
+
+func main() {
+	//建立连接
+	addr, err := net.ResolveTCPAddr(&quot;tcp&quot;, &quot;:8000&quot;)
+	if err != nil {
+		golog.Fatalf(&quot;resolve addr error: %v&quot;, err)
+	}
+	listener, err := net.ListenTCP(&quot;tcp&quot;, addr)
+	if err != nil {
+		golog.Fatalf(&quot;listen error: %v&quot;, err)
+	}
+	defer listener.Close()
+
+	//构造 server 对象
+	s := &amp;server{
+		listener: listener,
+		addr:     addr,
+	}
+
+	for {
+		conn, err := s.listener.Accept()
+		if err != nil {
+			continue
+		}
+		//进入协程处理该连接
+		go handle(conn)
+	}
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Spring Boot 配置使用 Redis 缓存 Json 值]]></title>
         <id>https://m01i0ng.js.org/mNqBPPh6J/</id>
@@ -755,194 +967,6 @@ lvm&gt;quit 　退出
 <li>开启</li>
 </ul>
 <p><code>systemctl start ntpd &amp;&amp; systemctl enable ntpd</code></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[使用 Kubeadm 快速创建 K8S 集群]]></title>
-        <id>https://m01i0ng.js.org/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/</id>
-        <link href="https://m01i0ng.js.org/shi-yong-kubeadm-kuai-su-chuang-jian-k8s-ji-qun/">
-        </link>
-        <updated>2020-02-08T05:39:13.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="环境架构">环境架构</h2>
-<h3 id="服务器">服务器</h3>
-<ul>
-<li>192.168.1.220 k8s-master</li>
-<li>192.168.1.221 k8s-node-1</li>
-<li>192.168.1.223 k8s-node-2</li>
-</ul>
-<h3 id="系统centos-74">系统：centos 7.4</h3>
-<h3 id="集群部署方式kubeadm">集群部署方式：kubeadm</h3>
-<h2 id="系统配置">系统配置</h2>
-<h3 id="配置主机映射">配置主机映射</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">cat &gt; /etc/hosts &lt;&lt; EOF
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-
-192.168.1.220 k8s-master
-192.168.1.221 k8s-node-1
-192.168.1.223 k8s-node-2
-EOF
-</code></pre>
-<h3 id="禁用-selinux">禁用 selinux</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">sed -i &quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/sysconfig/selinux
-sed -i &quot;s/^SELINUX=enforcing/SELINUX=disabled/g&quot; /etc/selinux/config
-sed -i &quot;s/^SELINUX=permissive/SELINUX=disabled/g&quot; /etc/sysconfig/selinux
-sed -i &quot;s/^SELINUX=permissive/SELINUX=disabled/g&quot; /etc/selinux/config
-setenforce 0
-</code></pre>
-<h3 id="禁用防火墙">禁用防火墙</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">systemctl disable firewalld &amp;&amp; systemctl stop firewalld
-</code></pre>
-<h3 id="关闭交换分区">关闭交换分区</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">sed -i 's/.*swap.*/#&amp;/' /etc/fstab
-swapoff -a
-</code></pre>
-<h3 id="配置转发参数">配置转发参数</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-vm.swappiness=0
-EOF
-sysctl --system
-</code></pre>
-<h3 id="加载-ipvs-相关内核模块">加载 ipvs 相关内核模块</h3>
-<p>所有节点</p>
-<pre><code class="language-bash"># 如果重新开机，需要重新加载
-modprobe ip_vs
-modprobe ip_vs_rr
-modprobe ip_vs_wrr
-modprobe ip_vs_sh
-modprobe nf_conntrack_ipv4
-lsmod | grep ip_vs
-</code></pre>
-<h2 id="安装配置-docker">安装配置 Docker</h2>
-<p>k8s v1.11.0 版本推荐使用 Docker v17.03，经测试 v1.13 也能正常使用，而最新的 v18.05 会产生警告，并无法使用资源限制</p>
-<h3 id="安装-docker">安装 Docker</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">yum install -y docker &amp;&amp;\
-systemctl enable docker &amp;&amp;\
-systemctl start docker
-</code></pre>
-<h3 id="配置国内镜像">配置国内镜像</h3>
-<p>所有节点</p>
-<pre><code class="language-bash">cat &gt; /etc/docker/daemon.json &lt;&lt; EOF
-{
-  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]
-}
-EOF
-systemctl daemon-reload
-systemctl restart docker
-</code></pre>
-<h2 id="安装配置-kubernetes">安装配置 Kubernetes</h2>
-<h3 id="安装-kubernetes">安装 Kubernetes</h3>
-<p>所有节点</p>
-<pre><code class="language-bash"># 配置源
-cat &gt; /etc/yum.repos.d/kubernetes.repo &lt;&lt; EOF
-[kubernetes]
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-EOF
-
-# 安装
-yum install -y kubelet kubeadm kubectl ipvsadm
-</code></pre>
-<h3 id="配置启动-kubelet">配置启动 Kubelet</h3>
-<p>所有节点</p>
-<pre><code class="language-bash"># 配置kubelet使用国内pause镜像
-# 配置kubelet的cgroups
-# 获取docker的cgroups
-DOCKER_CGROUPS=$(docker info | grep 'Cgroup' | cut -d' ' -f3)
-echo $DOCKER_CGROUPS
-cat &gt; /etc/sysconfig/kubelet &lt;&lt; EOF
-KUBELET_EXTRA_ARGS=&quot;--cgroup-driver=$DOCKER_CGROUPS --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1&quot;
-EOF
-
-# 启动
-systemctl daemon-reload
-systemctl enable kubelet &amp;&amp; systemctl start kubelet
-</code></pre>
-<h3 id="配置-master-节点">配置 master 节点</h3>
-<p>master 节点</p>
-<pre><code class="language-bash"># 生成配置文件
-cat &gt; kubeadm-master.config &lt;&lt; EOF
-apiVersion: kubeadm.k8s.io/v1alpha2
-kind: MasterConfiguration
-kubernetesVersion: v1.11.0
-imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
-api:
-  # master 节点 ip
-  advertiseAddress: 192.168.1.220
-
-controllerManagerExtraArgs:
-  node-monitor-grace-period: 10s
-  pod-eviction-timeout: 10s
-
-networking:
-  podSubnet: 10.244.0.0/16
-
-kubeProxy:
-  config:
-    # mode: ipvs
-    mode: iptables
-EOF
-</code></pre>
-<pre><code class="language-bash"># 提前拉取镜像，如果失败可以多次尝试
-kubeadm config images pull --config kubeadm-master.config
-</code></pre>
-<pre><code class="language-bash"># 启动
-kubeadm init --config kubeadm-master.config
-</code></pre>
-<p>如以上命令没有出错，会出现类似 <code>kubeadm --join xxx</code> 的说明</p>
-<pre><code class="language-bash">rm -rf $HOME/.kube
-mkdir -p $HOME/.kube
-cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-chown $(id -u):$(id -g) $HOME/.kube/config
-</code></pre>
-<p>执行 <code>kubectl get nodes</code> 查看节点，此时状态应该为 NotReady，接着开始配置 <code>flannel</code> 网络插件</p>
-<pre><code class="language-bash"># 修改镜像
-wgte https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml
-sed -i 's/k8s.gcr.io/registry.cn-shanghai.aliyuncs.com\/gcr-k8s/g' kube-flannel.yaml
-</code></pre>
-<pre><code class="language-bash"># 部署
-kubectl apply -f kube-flannel.yml
-</code></pre>
-<p>查看（需要时间配置，可反复执行第一条查看直到 <code>pods</code> 状态全为 <code>Running</code>）</p>
-<pre><code class="language-bash">kubectl get po -n kube-system
-kubectl get svc -n kube-system
-</code></pre>
-<p>配置好网络之后 kubeadm 会自动部署 coredns，再执行 <code>kubectl get nodes</code>，此时 <code>master</code> 节点状态应该为 <code>Ready</code></p>
-<h3 id="配置子节点">配置子节点</h3>
-<p>node-1、node-2 节点</p>
-<p><code>master</code> 节点执行 <code>kubeadm token create --print-join-command</code>，将结果复制，到 <code>node</code> 上执行，加入集群，如果执行失败可能是 <code>selinux</code> 没关（我在此处困了很久……），最后在 <code>master</code> 节点执行 <code>kubectl get node</code>，应该会看见加入进来的节点</p>
-<h2 id="测试集群">测试集群</h2>
-<p>master 节点</p>
-<p>部署 deploy</p>
-<pre><code class="language-bash">kubectl run nginx --replicas=2 --image=nginx:alpine --port=80
-kubectl expose deployment nginx --type=NodePort --name=test-service-nodeport
-kubectl expose deployment nginx --name=test-service
-
-kubectl describe svc test-service
-</code></pre>
-<p>访问测试，32340 为上面最后一条命令查看 svc 时获取的端口</p>
-<p>浏览器打开 <code>http://&lt;master-ip&gt;:&lt;32340&gt;</code> 会返回 nginx 的欢迎界面</p>
-<p>清理删除</p>
-<pre><code class="language-bash">kubectl delete svc test-service test-service-nodeport
-kubectl delete deploy nginx
-</code></pre>
-<h2 id="结束">结束</h2>
-<ul>
-<li>部署完成之后想增加节点只要按照子节点部署的步骤进行即可，之后可以参考官方文档安装 <code>dashboard heapster</code> 等插件</li>
-<li>此为单主多子节点配置，多主多子配置方法有所不同，日后再说--</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
