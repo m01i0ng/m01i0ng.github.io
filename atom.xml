@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-08-14T02:43:51.087Z</updated>
+    <updated>2020-08-14T02:44:08.877Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -11,12 +11,12 @@
     <icon>https://m01i0ng.js.org/favicon.ico</icon>
     <rights>All rights reserved 2020, Untitled</rights>
     <entry>
-        <title type="html"><![CDATA[使用 Golang 构建一个简单地 TCP 服务]]></title>
+        <title type="html"><![CDATA[使用 Golang 构建一个简单的 TCP 服务]]></title>
         <id>https://m01i0ng.js.org/2SxOltbTK/</id>
         <link href="https://m01i0ng.js.org/2SxOltbTK/">
         </link>
         <updated>2020-08-14T02:43:14.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="使用-golang-构建一个简单地-tcp-服务">使用 Golang 构建一个简单地 TCP 服务</h1>
+        <content type="html"><![CDATA[<h1 id="使用-golang-构建一个简单的-tcp-服务">使用 Golang 构建一个简单的 TCP 服务</h1>
 <p>Golang 原生的协程使其在处理高并发方面很有优势，下面使用 Go 来简单实现个支持并发的 TCP 服务器</p>
 <h2 id="首先实现客户端">首先实现客户端</h2>
 <p>首先定义针对客户端的结构体，包含连接、地址和一个用来接收停止信号的 chan</p>
