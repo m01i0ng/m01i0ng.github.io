@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://m01i0ng.js.org</id>
     <title>Untitled</title>
-    <updated>2020-08-14T02:44:08.877Z</updated>
+    <updated>2020-09-03T09:30:55.045Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://m01i0ng.js.org"/>
     <link rel="self" href="https://m01i0ng.js.org/atom.xml"/>
@@ -601,6 +601,9 @@ private Set&lt;String&gt; scan(String pattern) {
         </link>
         <updated>2020-02-08T05:41:43.000Z</updated>
         <content type="html"><![CDATA[<h2 id="系统">系统</h2>
+<h3 id="upic">uPic</h3>
+<p><code>brew cask isntall upic</code></p>
+<p>一款牛逼闪闪的图床上传软件（也可上传文件，我的最爱</p>
 <h3 id="dozer">Dozer</h3>
 <p><code>brew cask install dozer</code></p>
 <p>折叠状态栏菜单，与之相对的一款收费软件为 <code>Bartender</code></p>
